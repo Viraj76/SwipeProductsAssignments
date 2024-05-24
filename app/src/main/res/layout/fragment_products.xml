@@ -7,13 +7,116 @@
     tools:context=".presentation.products.ProductsFragment">
 
 
-    <TextView
+
+        <TextView
+            android:id="@+id/tvProducts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/products"
+            android:fontFamily="@font/title_medium"
+            android:textSize="@dimen/_23ssp"
+            android:textColor="@color/orange"
+            android:layout_margin="@dimen/_14sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/searchCv"
+            />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/searchCv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:backgroundTint="@color/white"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvProducts"
+        app:strokeColor="@color/orange">
+
+        <EditText
+            android:id="@+id/searchEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:drawableStart="@drawable/baseline_search_24"
+            android:drawablePadding="10dp"
+            android:hint="Search"
+            android:layout_marginHorizontal="@dimen/_5sdp"
+
+            android:padding="10dp"
+            android:textColorHint="@color/orange"
+            tools:ignore="HardcodedText" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchCv"
+        android:orientation="horizontal">
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_5sdp"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include layout="@layout/shimmer_products" />
+
+                <include layout="@layout/shimmer_products" />
+
+                <include layout="@layout/shimmer_products" />
+
+                <include layout="@layout/shimmer_products" />
+
+                <include layout="@layout/shimmer_products" />
+
+                <include layout="@layout/shimmer_products" />
+
+            </LinearLayout>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvChapters"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_5sdp"
+            android:visibility="visible"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/iv_products" />
+
+
+    </LinearLayout>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAddProducts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/products"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:contentDescription="@string/add_products"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="@dimen/_20sdp"
+        android:src="@drawable/baseline_add_24"
+        android:backgroundTint="@color/orange"
+        app:tint="@color/white"
+        />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

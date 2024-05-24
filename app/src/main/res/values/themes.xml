@@ -6,4 +6,6 @@
     </style>
 
     <style name="Theme.SwipeProducts" parent="Base.Theme.SwipeProducts" />
+
+
 </resources>

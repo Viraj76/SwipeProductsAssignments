@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/productsFragment"
-        android:name="com.example.swipeproducts.ProductsFragment"
+        android:name="com.example.swipeproducts.presentation.products.ProductsFragment"
         android:label="fragment_products"
         tools:layout="@layout/fragment_products" >
         <action
@@ -20,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/addProductsFragment"
-        android:name="com.example.swipeproducts.AddProductsFragment"
+        android:name="com.example.swipeproducts.presentation.add_products.AddProductsFragment"
         android:label="fragment_add_products"
         tools:layout="@layout/fragment_add_products" />
 </navigation>

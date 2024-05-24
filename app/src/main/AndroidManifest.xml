@@ -13,7 +13,7 @@
         android:theme="@style/Theme.SwipeProducts"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".presentation.main_activity.MainActivity"
             android:theme="@style/App.Starting.Theme"
             android:exported="true">
             <intent-filter>

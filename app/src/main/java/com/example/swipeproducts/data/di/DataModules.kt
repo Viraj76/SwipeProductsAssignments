@@ -1,5 +1,10 @@
 package com.example.swipeproducts.data.di
 
+import android.app.Application
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import com.example.swipeproducts.data.local.room.ProductsDao
+import com.example.swipeproducts.data.local.room.ProductsDatabase
 import com.example.swipeproducts.data.remote.api.ProductsAPI
 import com.example.swipeproducts.data.repository.ProductsRepositoryImpl
 import com.example.swipeproducts.domain.repository.ProductsRepository
@@ -10,6 +15,7 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
+import kotlin.math.sin
 
 
 fun provideProductsAPI() : ProductsAPI{
@@ -23,14 +29,32 @@ fun provideProductsAPI() : ProductsAPI{
         .create(ProductsAPI::class.java)
 }
 
-
-fun provideProductsRepository(productsAPI: ProductsAPI) : ProductsRepository{
-    return ProductsRepositoryImpl(productsAPI)
+fun provideProductDataBase(
+    application: Application
+) : ProductsDatabase{
+    return Room.databaseBuilder(
+        context = application,
+        klass = ProductsDatabase::class.java,
+        name = "Product DB",
+    ).fallbackToDestructiveMigration()
+        .build()
 }
+fun provideProductsDao(productsDatabase: ProductsDatabase) : ProductsDao{
+    return productsDatabase.productsDao
+}
+fun provideProductsRepository(
+    productsAPI: ProductsAPI,
+    productsDao: ProductsDao
+) : ProductsRepository{
+    return ProductsRepositoryImpl(productsAPI , productsDao)
+}
+
+
 
 val dataModules = module {
     // providing instance only once ,
     single { provideProductsAPI() }
-    single { provideProductsRepository(get()) }
-
+    single { provideProductsDao(get()) }
+    single { provideProductsRepository(get(),get()) }
+    single { provideProductDataBase(get()) }
 }

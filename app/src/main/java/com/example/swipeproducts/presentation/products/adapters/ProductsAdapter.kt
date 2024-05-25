@@ -39,7 +39,15 @@ class ProductsAdapter : RecyclerView.Adapter<ProductsAdapter.ProductsViewHolder>
     override fun onBindViewHolder(holder: ProductsViewHolder, position: Int) {
         val product = differ.currentList[position]
         holder.binding.apply {
-            ivProduct.load(product.image){placeholder(R.drawable.placeholder)}
+
+            ivProduct.let {
+                if(product.product_name.isEmpty()){
+                    it.load(R.drawable.placeholder)
+                }
+                else{
+                    it.load(product.image){placeholder(R.drawable.placeholder)}
+                }
+            }
 
             tvProductName.text = product.product_name
             tvProductPrice.text = "₹${product.price}"

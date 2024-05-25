@@ -68,7 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/_5sdp"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -86,6 +86,8 @@
                 <include layout="@layout/shimmer_products" />
 
                 <include layout="@layout/shimmer_products" />
+                <include layout="@layout/shimmer_products" />
+                <include layout="@layout/shimmer_products" />
 
             </LinearLayout>
 
@@ -93,13 +95,13 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvChapters"
+            android:id="@+id/rvProducts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/_5sdp"
             android:visibility="visible"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/iv_products" />
+           />
 
 
     </LinearLayout>

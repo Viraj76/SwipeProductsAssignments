@@ -1,6 +1,6 @@
 package com.example.swipeproducts.domain.models
 
-data class ProductsDTOItem(
+data class Product(
     val image: String,
     val price: Double,
     val product_name: String,

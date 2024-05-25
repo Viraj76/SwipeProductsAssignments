@@ -78,12 +78,12 @@ dependencies {
     //shimmer effect
     implementation(libs.shimmer)
 
-    //koin for DI
-    implementation(libs.koin.core)
+    // Koin core features
+    implementation("io.insert-koin:koin-android:3.2.0")
 
-    // Koin Android features
-    implementation(libs.koin.android)
-    implementation(libs.koin.androidx.viewmodel)
-
-
+//    // Koin Android features
+//    implementation("io.koin:koin-android:3.2.0")
+//    implementation("io.koin:koin-androidx-viewmodel:3.2.0")
 }
+
+

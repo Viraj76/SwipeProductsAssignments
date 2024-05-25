@@ -27,4 +27,6 @@ object Constants {
         "Smart Home Hub",
         "Wireless Charger"
     )
+
+
 }

@@ -12,13 +12,12 @@ import org.koin.core.component.inject
 
 class ProductsViewModel : ViewModel() , KoinComponent{
 
+
     private val productUseCases : ProductUseCases by inject()
 
     fun getProductList() {
         viewModelScope.launch {
             productUseCases.getProductList().collect{resource ->
-
-
                 when(resource){
                     is Resource.Loading ->{
                         Log.d("viewmodel", "loading")
@@ -32,9 +31,7 @@ class ProductsViewModel : ViewModel() , KoinComponent{
                     is Resource.Error -> {
                         Log.d("viewmodel",resource.message.toString())
                     }
-
                 }
-
             }
         }
     }

@@ -4,4 +4,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_products">Add Products</string>
     <string name="products">Products</string>
+    <string name="product_name">Product Name</string>
+    <string name="product_price">Product Price</string>
+    <string name="product_tax">Product Tax</string>
+    <string name="product_type">Product Type</string>
 </resources>

@@ -93,6 +93,10 @@ dependencies {
 
     //coil
     implementation("io.coil-kt:coil:2.6.0")
+
+    //lottie animation
+
+    implementation("com.airbnb.android:lottie:6.4.0")
 }
 
 

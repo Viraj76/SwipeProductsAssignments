@@ -84,6 +84,11 @@ dependencies {
 //    // Koin Android features
 //    implementation("io.koin:koin-android:3.2.0")
 //    implementation("io.koin:koin-androidx-viewmodel:3.2.0")
+
+    //moshi
+    implementation("com.squareup.moshi:moshi-kotlin:1.12.0")
+    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
+    implementation("com.squareup.okhttp3:okhttp:4.9.1")
 }
 
 

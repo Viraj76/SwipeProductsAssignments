@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.core.util.Pools
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.swipeproducts.R
 import com.example.swipeproducts.databinding.FragmentProductsBinding
 import com.example.swipeproducts.presentation.products.adapters.ProductsAdapter
@@ -33,8 +34,15 @@ class ProductsFragment : Fragment() {
 
         showingProducts()
 
+        navigateToAddProductFragment()
 
         return binding.root
+    }
+
+    private fun navigateToAddProductFragment() {
+        binding.fabAddProducts.setOnClickListener{
+            findNavController().navigate(R.id.action_productsFragment_to_addProductsFragment)
+        }
     }
 
     private fun showingProducts() {

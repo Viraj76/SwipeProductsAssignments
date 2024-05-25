@@ -16,14 +16,14 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class ProductsFragment : Fragment() {
-    private lateinit var binding : FragmentProductsBinding
-    private val viewModel : ProductsViewModel by viewModels()
-    private lateinit var productsAdapter : ProductsAdapter
+    private lateinit var binding: FragmentProductsBinding
+    private val viewModel: ProductsViewModel by viewModels()
+    private lateinit var productsAdapter: ProductsAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-       binding = FragmentProductsBinding.inflate(layoutInflater)
+        binding = FragmentProductsBinding.inflate(layoutInflater)
 
 
 
@@ -40,37 +40,30 @@ class ProductsFragment : Fragment() {
     private fun showingProducts() {
 
 
-            lifecycleScope.launch {
-                viewModel.productList.collect{state ->
-                    when{
-                        state.loading ->{
-
-                                binding.shimmer.visibility = View.VISIBLE
-
-                        }
-                        state.productList.isNotEmpty() ->{
-                            productsAdapter.differ.submitList(state.productList)
-                            binding.shimmer.visibility = View.GONE
-                        }
-                        state.error.isNotBlank() ->{
-                            Log.d("error" , state.error)
-                        }
+        lifecycleScope.launch {
+            viewModel.productList.collect { state ->
+                when {
+                    state.loading -> {
+                        binding.shimmer.visibility = View.VISIBLE
                     }
 
+                    state.productList.isNotEmpty() -> {
+                        productsAdapter.differ.submitList(state.productList)
+                        binding.shimmer.visibility = View.GONE
+                    }
+
+                    state.error.isNotEmpty() -> {
+                        Log.d("error", state.error)
+                    }
 
                 }
+
+
             }
-
-
+        }
 
     }
 
-//    private fun productsFetched(): Boolean {
-//        val state by viewModel.productList.collect()
-//        return when(viewModel.productList.collect()){
-//
-//        }
-//    }
 
     private fun initializeAdapter() {
         productsAdapter = ProductsAdapter()

@@ -41,14 +41,13 @@ class ProductsAdapter : RecyclerView.Adapter<ProductsAdapter.ProductsViewHolder>
         holder.binding.apply {
 
             ivProduct.let {
-                if(product.product_name.isEmpty()){
+                if(product.product_name == ""){
                     it.load(R.drawable.placeholder)
                 }
                 else{
                     it.load(product.image){placeholder(R.drawable.placeholder)}
                 }
             }
-
             tvProductName.text = product.product_name
             tvProductPrice.text = "₹${product.price}"
             tvProductType.text = product.product_type

@@ -20,6 +20,7 @@ class ProductsRepositoryImpl(
         }
         // here the single source of data is room , if internet not available then also we can access the cached data.
         catch (e : Exception){
+            Log.d("ex" , e.message.toString())
             productsDao.getProducts()
         }
 

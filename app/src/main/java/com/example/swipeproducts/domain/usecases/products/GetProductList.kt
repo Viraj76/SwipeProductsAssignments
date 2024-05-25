@@ -1,4 +1,4 @@
-package com.example.swipeproducts.domain.usecases
+package com.example.swipeproducts.domain.usecases.products
 
 import com.example.swipeproducts.domain.models.Product
 import com.example.swipeproducts.domain.repository.ProductsRepository
@@ -23,6 +23,7 @@ class GetProductList(
         catch (e : Exception){
             emit(Resource.Error(message = e.message.toString()))
         }
+
 
     }.flowOn(Dispatchers.IO)
 }

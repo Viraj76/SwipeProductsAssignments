@@ -47,6 +47,7 @@
         >
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilProductName"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -71,6 +72,7 @@
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
+            android:id="@+id/tilProductType"
             android:layout_height="0dp"
             android:layout_marginHorizontal="@dimen/_10sdp"
             android:layout_weight="0.5"
@@ -82,7 +84,7 @@
             app:hintTextColor="@color/orange">
 
             <AutoCompleteTextView
-                android:id="@+id/etProductUnit"
+                android:id="@+id/etProductType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/product_type" />
@@ -97,6 +99,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
+                android:id="@+id/tilProductPrice"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_1sdp"
@@ -119,6 +122,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
+                android:id="@+id/tilProductTax"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_1sdp"

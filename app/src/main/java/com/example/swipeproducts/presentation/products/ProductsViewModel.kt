@@ -24,6 +24,7 @@ class ProductsViewModel : ViewModel() , KoinComponent{
                     }
                     is Resource.Success ->{
                         val data  = resource.data
+                        Log.d("count",data?.size.toString())
                         for (i in data!!){
                             Log.d("viewmodel",i.toString())
                         }

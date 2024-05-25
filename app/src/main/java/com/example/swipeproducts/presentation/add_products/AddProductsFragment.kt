@@ -5,8 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import com.example.swipeproducts.R
 import com.example.swipeproducts.databinding.FragmentAddProductsBinding
+import com.example.swipeproducts.utils.Constants
 
 
 class AddProductsFragment : Fragment() {
@@ -19,9 +21,15 @@ class AddProductsFragment : Fragment() {
         binding = FragmentAddProductsBinding.inflate(layoutInflater)
 
 
+        providingProductsTypes()
         onAddProductButtonClick()
 
         return binding.root
+    }
+
+    private fun providingProductsTypes() {
+        val productsTypes = ArrayAdapter(requireContext() , R.layout.show_product_types, Constants.productList)
+        binding.etProductType.setAdapter(productsTypes)
     }
 
     private fun onAddProductButtonClick() {
@@ -52,7 +60,7 @@ class AddProductsFragment : Fragment() {
 //        } else {
 //            textInputLayout.error = null // Clear the error
 //        }
+
+
     }
-
-
 }

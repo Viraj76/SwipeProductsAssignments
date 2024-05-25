@@ -12,6 +12,7 @@ import com.example.swipeproducts.databinding.FragmentProductsBinding
 class ProductsFragment : Fragment() {
     private lateinit var binding : FragmentProductsBinding
     private val viewModel : ProductsViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

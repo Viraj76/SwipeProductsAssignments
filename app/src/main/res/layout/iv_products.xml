@@ -42,7 +42,7 @@
                 app:cardUseCompatPadding="true"
                 >
                 <ImageView
-                    android:id="@+id/backgroundImage"
+                    android:id="@+id/ivProduct"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:src="@drawable/car"

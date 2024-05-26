@@ -1,4 +1,4 @@
-package com.example.swipeproducts.domain
+package com.example.swipeproducts.domain.di
 
 import com.example.swipeproducts.domain.repository.ProductsRepository
 import com.example.swipeproducts.domain.usecases.products.GetProductList

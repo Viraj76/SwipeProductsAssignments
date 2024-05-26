@@ -56,10 +56,15 @@ class AddProductsViewModel : ViewModel() , KoinComponent {
         }
     }
 
+    fun update(){
+        _postProduct.value = PostProductState()
+    }
 
     fun sendNotification(notification: Notification){
         viewModelScope.launch {
-            notificationUseCase.sendNotification(notification)
+            Log.d("sendnoti" , "viewmodel")
+            notificationUseCase.sendNotification(notification).collect{resource-> }
+
         }
     }
 

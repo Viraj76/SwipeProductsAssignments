@@ -16,6 +16,7 @@ import com.example.swipeproducts.R
 import com.example.swipeproducts.data.di.dataModules
 import com.example.swipeproducts.data.dto.notification.Notification
 import com.example.swipeproducts.data.dto.notification.NotificationData
+import com.example.swipeproducts.data.remote.api.ApiUtilities
 import com.example.swipeproducts.databinding.FragmentAddProductsBinding
 import com.example.swipeproducts.databinding.PostingDoneBinding
 import com.example.swipeproducts.utils.Constants
@@ -32,6 +33,9 @@ import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.io.File
 import java.io.FileOutputStream
 import java.io.FilterOutputStream
@@ -90,14 +94,19 @@ class AddProductsFragment : Fragment() {
                             val title = state.data.message
                             val body = "Product Name - ${state.data.product_details.product_name} , Product Id - ${state.data.product_id}"
                             val notification = Notification(token , NotificationData(title , body))
+                            Log.d("sendnoti" , notification.toString())
                             viewModel.sendNotification(notification = notification)
                         }
+
+
                         delay(2000)
                         hideDialog()
                         clearAllField()         // clear all the fields after posting one product
+                        viewModel.update()      // clearing the state , to avoid bugs
                         showPostDoneDialog()   // showing done dialog for better UX
                         delay(5000)
                         hidePostDoneDialog()   // hiding the dialog after 5 seconds
+
                     }
                 }
             }

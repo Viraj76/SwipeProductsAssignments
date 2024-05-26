@@ -13,5 +13,5 @@ interface NotificationAPI {
         "Authorization: key=AAAAgTSiYdE:APA91bEpFZHUlPJULIRdkzWXcPMfm6fo9cAWFirv-5a7hvDDFzB7XjM3sTAyhzpreZ0kqeBVeF--aTbngHAeWT-kgsruxSe7f9ls4iNwpyE3Rw7oskhQdnqFtCj_S1cFmshnuwytTvxf"
     )
     @POST("fcm/send")
-    suspend fun sendNotification(@Body notification : Notification) : Call<Notification>    // here we can enqueue the status
+    fun sendNotification(@Body notification : Notification) : Call<Notification>    // here we can enqueue the status
 }

@@ -1,5 +1,6 @@
 package com.example.swipeproducts.domain.usecases.notification
 
+import android.util.Log
 import com.example.swipeproducts.data.dto.notification.Notification
 import com.example.swipeproducts.domain.models.Product
 import com.example.swipeproducts.domain.repository.NotificationRepository
@@ -14,7 +15,7 @@ class SendNotification(
     private val notificationRepository: NotificationRepository
 ) {
     operator fun invoke(notification: Notification) : Flow<Resource<Call<Notification>>> = flow{
-
+        Log.d("sendnoti" , "usecase")
         emit(Resource.Loading())
 
         try {

@@ -5,5 +5,5 @@ import retrofit2.Call
 
 interface NotificationRepository {
 
-    suspend fun sendNotification(notification: Notification) : Call<Notification>
+     fun sendNotification(notification: Notification) : Call<Notification>
 }

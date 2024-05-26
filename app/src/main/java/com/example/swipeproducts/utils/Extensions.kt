@@ -6,9 +6,12 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.provider.MediaStore
 import android.util.Log
+import android.view.LayoutInflater
 import android.webkit.MimeTypeMap
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import com.example.swipeproducts.databinding.ProgressDialogBinding
 
 
 fun Fragment.showToast(message: String?) {
@@ -66,4 +69,12 @@ fun Uri.isValidImage(context: Context): Boolean {
     }
 
     return true
+}
+
+fun Fragment.showDialog(message: String){
+     var dialog : AlertDialog? = null
+    val progress = ProgressDialogBinding.inflate(LayoutInflater.from(requireContext()))
+    progress.tvMessage.text = message
+    dialog   = AlertDialog.Builder(requireContext()).setView(progress.root).setCancelable(false).create()
+    dialog.show()
 }

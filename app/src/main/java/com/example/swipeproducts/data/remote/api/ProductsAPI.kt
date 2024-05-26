@@ -21,6 +21,6 @@ interface ProductsAPI {
         @Part("product_type") productType: okhttp3.RequestBody,
         @Part("price") price: okhttp3.RequestBody,
         @Part("tax") tax: okhttp3.RequestBody,
-        @Part image: MultipartBody.Part?
+        @Part files: List<MultipartBody.Part>?
     ): ProductPostResponse
 }

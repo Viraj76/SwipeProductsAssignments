@@ -63,7 +63,9 @@ class AddProductsFragment : Fragment() {
             val productPrice = binding.etProductPrice.text.toString()
             val productTax = binding.etProductTax.text.toString()
 
-            checkForEmptyFields(productName,productType,productPrice,productTax)
+            if(!checkForEmptyFields(productName,productType,productPrice,productTax)){
+                //
+            }
 
 
         }
@@ -74,25 +76,31 @@ class AddProductsFragment : Fragment() {
         productType: String,
         productPrice: String,
         productTax: String
-    ) {
+    ) : Boolean{
 
         if (productName.isEmpty()) {
             binding.tilProductName.error = "Please provide Product Name"
+            return false
         }
         if(productType.isEmpty()){
             binding.tilProductType.error = "Please provide Product Type"
+            return false
         }
         if(productPrice.isEmpty()){
             binding.tilProductPrice.error = "Please provide Product Price"
+            return false
         }
         if(productTax.isEmpty()){
             binding.tilProductTax.error = "Please provide Product Tax"
+            return false
         }
 
         if(selectedImageUri == null){
             showToast("Please select an image")
+            return false
         }
 
+        return true
 //        } else {
 //            textInputLayout.error = null // Clear the error
 //        }

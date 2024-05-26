@@ -5,6 +5,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.swipeproducts.data.local.room.ProductsDao
 import com.example.swipeproducts.data.local.room.ProductsDatabase
+import com.example.swipeproducts.data.remote.api.NotificationAPI
 import com.example.swipeproducts.data.remote.api.ProductsAPI
 import com.example.swipeproducts.data.repository.ProductsRepositoryImpl
 import com.example.swipeproducts.domain.repository.ProductsRepository
@@ -50,6 +51,15 @@ fun provideProductsRepository(
     return ProductsRepositoryImpl(productsAPI , productsDao)
 }
 
+fun provideNotificationAPI() : NotificationAPI{
+       return Retrofit.Builder()
+            .baseUrl("https://fcm.googleapis.com/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(NotificationAPI::class.java)
+
+}
+
 
 
 
@@ -59,4 +69,5 @@ val dataModules = module {
     single { provideProductsDao(get()) }
     single { provideProductsRepository(get(),get()) }
     single { provideProductDataBase(get()) }
+    single { provideNotificationAPI() }
 }

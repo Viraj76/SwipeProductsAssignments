@@ -1,6 +1,10 @@
 package com.example.swipeproducts.domain.local.manager
 
-interface LocalManagerUser {
+import kotlinx.coroutines.flow.Flow
 
+interface LocalUserManager {
+
+    suspend fun saveUserEntry()
+    fun readUserEntry()  : Flow<Boolean>
 
 }

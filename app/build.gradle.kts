@@ -50,7 +50,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
+//Datastore
+    implementation ("androidx.datastore:datastore-preferences:1.1.1")
     // splash api
     implementation(libs.androidx.core.splashscreen)
     //text dimension

@@ -5,6 +5,8 @@ object Constants {
 
     const val BASE_URL = "https://app.getswipe.in/"
 
+    const val USER_SETTINGS = "user_settings"
+    const val APP_ENTRY = "app_entry"
     val productList = listOf(
         "Laptop",
         "Smartphone",

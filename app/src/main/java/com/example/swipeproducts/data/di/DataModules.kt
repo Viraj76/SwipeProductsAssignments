@@ -42,12 +42,14 @@ fun provideProductDataBase(
 fun provideProductsDao(productsDatabase: ProductsDatabase) : ProductsDao{
     return productsDatabase.productsDao
 }
+
 fun provideProductsRepository(
     productsAPI: ProductsAPI,
     productsDao: ProductsDao
 ) : ProductsRepository{
     return ProductsRepositoryImpl(productsAPI , productsDao)
 }
+
 
 
 

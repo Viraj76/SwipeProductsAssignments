@@ -23,9 +23,10 @@ class FilteringProducts(
 
             for(products in filter){
                 if(query.any {
-                        products.product_name?.uppercase(Locale.getDefault())?.contains(it) ==true||
-                                products.product_type?.uppercase(Locale.getDefault())?.contains(it) ==true||
-                                products.product_type?.toString()?.uppercase(Locale.getDefault())?.contains(it) ==true
+                        products.product_name.uppercase(Locale.getDefault())?.contains(it) ==true||
+                                products.product_type.uppercase(Locale.getDefault())?.contains(it) ==true||
+                                products.price.toString().uppercase(Locale.getDefault())?.contains(it) ==true||
+                                products.tax.toString().uppercase(Locale.getDefault()).contains(it)
 
                     }){
                     filteredList.add(products)

@@ -1,5 +1,6 @@
 package com.example.swipeproducts.presentation.products.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Filter
@@ -14,7 +15,7 @@ import com.example.swipeproducts.databinding.IvProductsBinding
 import com.example.swipeproducts.domain.models.Product
 import com.example.swipeproducts.utils.FilteringProducts
 
-class ProductsAdapter : RecyclerView.Adapter<ProductsAdapter.ProductsViewHolder>() , Filterable {
+class ProductsAdapter(val showingNoDataLottie: (Boolean) -> Unit) : RecyclerView.Adapter<ProductsAdapter.ProductsViewHolder>() , Filterable {
 
     class ProductsViewHolder(val binding : IvProductsBinding) : ViewHolder(binding.root)
 
@@ -36,8 +37,17 @@ class ProductsAdapter : RecyclerView.Adapter<ProductsAdapter.ProductsViewHolder>
     }
 
     override fun getItemCount(): Int {
-        return differ.currentList.size
+        val count = differ.currentList.size
+        if(count == 0){
+            showingNoDataLottie(true)
+        }
+        else{
+            showingNoDataLottie(false)
+        }
+        return count
     }
+
+
 
     override fun onBindViewHolder(holder: ProductsViewHolder, position: Int) {
         val product = differ.currentList[position]

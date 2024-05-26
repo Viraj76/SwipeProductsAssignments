@@ -85,11 +85,14 @@ fun Fragment.hideDialog(){
     dialog?.dismiss()
 }
 
+
+
+
 var doneDialog : AlertDialog? = null
 
 fun Fragment.showPostDoneDialog(){
-    val progress = PostingDoneBinding.inflate(LayoutInflater.from(requireContext()))
-    doneDialog   = AlertDialog.Builder(requireContext()).setView(progress.root).setCancelable(false).create()
+    val done = PostingDoneBinding.inflate(LayoutInflater.from(requireContext()))
+    doneDialog   = AlertDialog.Builder(requireContext()).setView(done.root).setCancelable(false).create()
     doneDialog!!.show()
 }
 

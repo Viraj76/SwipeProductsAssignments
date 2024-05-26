@@ -14,8 +14,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.swipeproducts.R
 import com.example.swipeproducts.databinding.FragmentAddProductsBinding
+import com.example.swipeproducts.databinding.PostingDoneBinding
 import com.example.swipeproducts.utils.Constants
 import com.example.swipeproducts.utils.hideDialog
+import com.example.swipeproducts.utils.hidePostDoneDialog
 import com.example.swipeproducts.utils.isValidImage
 import com.example.swipeproducts.utils.showDialog
 import com.example.swipeproducts.utils.showPostDoneDialog
@@ -33,8 +35,8 @@ import java.io.FilterOutputStream
 
 class AddProductsFragment : Fragment() {
 
-    private lateinit var binding : FragmentAddProductsBinding
-    private val viewModel : AddProductsViewModel by viewModels()
+    private lateinit var binding: FragmentAddProductsBinding
+    private val viewModel: AddProductsViewModel by viewModels()
     private var selectedImageUri: Uri? = null
     private val getContent =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
@@ -47,6 +49,7 @@ class AddProductsFragment : Fragment() {
 
             }
         }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -57,53 +60,65 @@ class AddProductsFragment : Fragment() {
         providingProductsTypes()
         selectingAnImage()
         onAddProductButtonClick()
+        observingPostingProductStatus()
+        return binding.root
+    }
+
+    private fun observingPostingProductStatus() {
         lifecycleScope.launch {
-            viewModel.postProduct.collect{state->
-                when{
-                    state.loading ->{
-                        Log.d("addprodviewm" , "showing dialod")
+            viewModel.postProduct.collect { state ->
+                when {
+                    state.loading -> {
                         showDialog("Posting Your Products....")
                     }
-                    state.error.isNotEmpty() ->{
+
+                    state.error.isNotEmpty() -> {
                         showDialog(state.error)
                     }
-                    state.data != null ->{
-                        Log.d("addprodviewm" , "hide dialod")
+
+                    state.data != null -> {
+                        /*
+                        Here the posting is too fast such that the dialog is almost not visible , i.e.
+                        I have added delay of 2 seconds to see the dialog only
+                         */
                         delay(2000)
                         hideDialog()
-                        // clear all the fields after posting one product
-                        clearAllField()
-                        showPostDoneDialog()
+                        clearAllField()         // clear all the fields after posting one product
+                        showPostDoneDialog()   // showing done dialog for better UX
+                        delay(4000)
+                        hidePostDoneDialog()   // hiding the dialog after 4 seconds
                     }
                 }
             }
         }
-              return binding.root
     }
 
+
+
     private fun selectingAnImage() {
-        binding.cvAddImage.setOnClickListener{
+        binding.cvAddImage.setOnClickListener {
             getContent.launch("image/*")
         }
     }
 
     private fun providingProductsTypes() {
-        val productsTypes = ArrayAdapter(requireContext() , R.layout.show_product_types, Constants.productList)
+        val productsTypes =
+            ArrayAdapter(requireContext(), R.layout.show_product_types, Constants.productList)
         binding.etProductType.setAdapter(productsTypes)
     }
 
     @SuppressLint("Recycle")
     private fun onAddProductButtonClick() {
-        binding.btnAddProduct.setOnClickListener{
+        binding.btnAddProduct.setOnClickListener {
             val productName = binding.etProductName.text.toString()
             val productType = binding.etProductType.text.toString()
             val productPrice = binding.etProductPrice.text.toString()
             val productTax = binding.etProductTax.text.toString()
 
-            if(checkForEmptyFields(productName,productType,productPrice,productTax)){
+            if (checkForEmptyFields(productName, productType, productPrice, productTax)) {
 
                 val filesDir = activity?.applicationContext!!.filesDir
-                val file = File(filesDir , "image.png")
+                val file = File(filesDir, "image.png")
 
                 val inputStream = activity?.contentResolver?.openInputStream(selectedImageUri!!)
                 val outputStream = FileOutputStream(file)
@@ -112,13 +127,13 @@ class AddProductsFragment : Fragment() {
 
                 val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
 
-                val part =  MultipartBody.Part.createFormData("profile" , file.name , requestBody)
+                val part = MultipartBody.Part.createFormData("profile", file.name, requestBody)
 
 
                 lifecycleScope.launch {
-                    Log.d("addprodviewm" , "posting products")
-                    viewModel.postProducts(productName,productType,productPrice, productTax, part)
-                    Log.d("addprodviewm" , viewModel.postProduct.value.toString())
+                    Log.d("addprodviewm", "posting products")
+                    viewModel.postProducts(productName, productType, productPrice, productTax, part)
+                    Log.d("addprodviewm", viewModel.postProduct.value.toString())
                 }
             }
 
@@ -127,7 +142,7 @@ class AddProductsFragment : Fragment() {
     }
 
 
-    private fun clearAllField(){
+    private fun clearAllField() {
         binding.etProductName.text?.clear()
         binding.etProductType.text?.clear()
         binding.etProductPrice.text?.clear()
@@ -148,32 +163,25 @@ class AddProductsFragment : Fragment() {
         productType: String,
         productPrice: String,
         productTax: String
-    ) : Boolean{
+    ): Boolean {
 
         // checking if there is any field empty or not
         if (productName.isEmpty()) {
             binding.tilProductName.error = "Please provide Product Name"
             return false
-        }
-        else if(productType.isEmpty()){
+        } else if (productType.isEmpty()) {
             binding.tilProductType.error = "Please provide Product Type"
             return false
-        }
-        else if(productPrice.isEmpty()){
+        } else if (productPrice.isEmpty()) {
             binding.tilProductPrice.error = "Please provide Product Price"
             return false
-        }
-        else if(productTax.isEmpty()){
+        } else if (productTax.isEmpty()) {
             binding.tilProductTax.error = "Please provide Product Tax"
             return false
-        }
-
-        else if(selectedImageUri == null){
+        } else if (selectedImageUri == null) {
             showToast("Please select an image")
             return false
-        }
-
-        else return true
+        } else return true
 //        } else {
 //            textInputLayout.error = null // Clear the error
 //        }

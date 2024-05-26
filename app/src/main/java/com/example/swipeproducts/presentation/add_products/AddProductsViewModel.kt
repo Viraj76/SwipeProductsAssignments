@@ -63,7 +63,8 @@ class AddProductsViewModel : ViewModel() , KoinComponent {
     fun sendNotification(notification: Notification){
         viewModelScope.launch {
             Log.d("sendnoti" , "viewmodel")
-            notificationUseCase.sendNotification(notification).collect{resource-> }
+            // we should always collect a flow other wise code will not run
+            notificationUseCase.sendNotification(notification).collect{ }
 
         }
     }

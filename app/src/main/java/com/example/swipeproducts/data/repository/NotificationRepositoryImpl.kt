@@ -13,6 +13,7 @@ class NotificationRepositoryImpl(
 ) : NotificationRepository {
     override fun sendNotification(notification: Notification): Call<Notification> {
         Log.d("sendnoti", "repo")
+        // always enqueue the call, otherwise code will not work.
         notificationAPI.sendNotification(notification).enqueue(object :
             Callback<Notification> {
             override fun onResponse(

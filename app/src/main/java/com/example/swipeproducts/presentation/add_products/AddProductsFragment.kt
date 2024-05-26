@@ -104,8 +104,8 @@ class AddProductsFragment : Fragment() {
                         clearAllField()         // clear all the fields after posting one product
                         viewModel.update()      // clearing the state , to avoid bugs
                         showPostDoneDialog()   // showing done dialog for better UX
-                        delay(5000)
-                        hidePostDoneDialog()   // hiding the dialog after 5 seconds
+                        delay(4500)
+                        hidePostDoneDialog()   // hiding the dialog after 4.5 seconds
 
                     }
                 }

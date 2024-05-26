@@ -22,8 +22,40 @@
             app:layout_constraintBottom_toTopOf="@id/searchCv"
             />
 
+    <LinearLayout
+        android:id="@+id/llNoInternet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone"
+        >
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_200sdp"
+            android:id="@+id/no_internet_view"
+            android:visibility="visible"
+            app:lottie_rawRes="@raw/no_internet"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/please_turn_on_your_internet_for_fetching_products"
+            android:fontFamily="@font/title_medium"
+            android:textSize="@dimen/_15ssp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textColor="@color/orange"
+            />
+    </LinearLayout>
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/searchCv"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_50sdp"
         android:backgroundTint="@color/white"
@@ -70,6 +102,7 @@
 
     <LinearLayout
         android:id="@+id/ll"
+        android:visibility="visible"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -124,6 +157,7 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAddProducts"
+        android:visibility="visible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/add_products"

@@ -186,17 +186,27 @@ class AddProductsFragment : Fragment() {
 
 
     private fun clearAllField() {
+        // clear text
         binding.etProductName.text?.clear()
         binding.etProductType.text?.clear()
         binding.etProductPrice.text?.clear()
         binding.etProductTax.text?.clear()
 
+        //clear focus
         binding.ivProduct.setImageURI(null)
         binding.tilProductName.clearFocus()
         binding.tilProductType.clearFocus()
         binding.tilProductPrice.clearFocus()
         binding.tilProductTax.clearFocus()
 
+        // clear errors
+        binding.tilProductName.error = null
+        binding.tilProductType.error = null
+        binding.tilProductPrice.error = null
+        binding.tilProductTax.error = null
+
+
+        // show default image
         binding.ivProduct.setImageResource(R.drawable.baseline_add_photo_alternate_24)
 
     }

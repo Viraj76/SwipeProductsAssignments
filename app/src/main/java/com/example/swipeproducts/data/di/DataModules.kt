@@ -3,22 +3,33 @@ package com.example.swipeproducts.data.di
 import android.app.Application
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.swipeproducts.data.local.manager.LocalUserManagerImpl
 import com.example.swipeproducts.data.local.room.ProductsDao
 import com.example.swipeproducts.data.local.room.ProductsDatabase
 import com.example.swipeproducts.data.remote.api.NotificationAPI
 import com.example.swipeproducts.data.remote.api.ProductsAPI
 import com.example.swipeproducts.data.repository.NotificationRepositoryImpl
 import com.example.swipeproducts.data.repository.ProductsRepositoryImpl
+import com.example.swipeproducts.domain.local.manager.LocalUserManager
 import com.example.swipeproducts.domain.repository.NotificationRepository
 import com.example.swipeproducts.domain.repository.ProductsRepository
 import com.example.swipeproducts.utils.Constants
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import kotlin.math.sin
+
+
+
+fun provideLocalUserManager(
+    application: Application
+) : LocalUserManager=
+     LocalUserManagerImpl(application)
+
 
 
 fun provideProductsAPI() : ProductsAPI{
@@ -72,6 +83,7 @@ fun provideNotificationRepository(
 
 val dataModules = module {
     // providing instance only once ,
+    single { provideLocalUserManager(application = androidApplication()) }
     single { provideProductsAPI() }
     single { provideProductsDao(get()) }
     single { provideProductsRepository(get(),get()) }

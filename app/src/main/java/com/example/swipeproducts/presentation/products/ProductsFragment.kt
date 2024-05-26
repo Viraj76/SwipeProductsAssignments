@@ -1,5 +1,6 @@
 package com.example.swipeproducts.presentation.products
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -16,35 +17,73 @@ import com.example.swipeproducts.databinding.FragmentProductsBinding
 import com.example.swipeproducts.domain.models.Product
 import com.example.swipeproducts.presentation.products.adapters.ProductsAdapter
 import com.example.swipeproducts.utils.NetworkManager
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
-class ProductsFragment : Fragment() {
-    private val networkManager: NetworkManager by inject{ parametersOf(requireContext()) }
+class ProductsFragment : Fragment(), AppEntryCallback {
+    private val networkManager: NetworkManager by inject { parametersOf(requireContext()) }
 
     private lateinit var binding: FragmentProductsBinding
     private val viewModel: ProductsViewModel by viewModels()
     private lateinit var productsAdapter: ProductsAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentProductsBinding.inflate(layoutInflater)
-
-
-        searchProducts()
-        fetchingProducts()
-
-        initializeAdapter()
-
-        showingProducts()
-
-        navigateToAddProductFragment()
-
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        checkAppUserEntry()
+        searchProducts()
+        navigateToAddProductFragment()
+    }
+
+    private fun checkAppUserEntry() {
+        // reading whether the user has entered to the app earlier or not
+        viewModel.readAppEntry(this)
+    }
+
+    private fun saveAppUserEntry() {
+
+        networkManager.observe(viewLifecycleOwner) { hasInternet ->
+
+//            Here we will store the app entry if and only if there is an internet.
+
+            if (hasInternet) {
+                binding.llNoInternet.visibility = View.GONE
+                binding.searchCv.visibility = View.VISIBLE
+                binding.ll.visibility = View.VISIBLE
+                binding.fabAddProducts.visibility = View.VISIBLE
+                fetchingProducts()
+                showingProducts()
+                Log.d("saving", "frag")
+                viewModel.saveAppUserEntry()
+            }
+            // if user has entered earlier then it's ok , but if not then show no internet indication
+            else {
+                lifecycleScope.launch {
+                    viewModel.appEntry.collect { isEntered ->
+                        if (!isEntered) {
+                            binding.llNoInternet.visibility = View.VISIBLE
+                            binding.searchCv.visibility = View.GONE
+                            binding.ll.visibility = View.GONE
+                            binding.fabAddProducts.visibility = View.GONE
+                        }
+                    }
+                }
+
+            }
+
+        }
+    }
 
 
     private fun searchProducts() {
@@ -53,7 +92,7 @@ class ProductsFragment : Fragment() {
 
             override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 val query = s.toString().trim()
-                if(query.isEmpty()) binding.rvProducts.scrollToPosition(0) // when user clears the search field , then user should see the first product of the list.
+                if (query.isEmpty()) binding.rvProducts.scrollToPosition(0) // when user clears the search field , then user should see the first product of the list.
                 productsAdapter.filter.filter(query)
             }
 
@@ -62,11 +101,10 @@ class ProductsFragment : Fragment() {
         })
     }
 
-    private fun showingNoDataLottie(show : Boolean){
-        if(show){
+    private fun showingNoDataLottie(show: Boolean) {
+        if (show) {
             binding.animationView.visibility = View.VISIBLE
-        }
-        else{
+        } else {
             binding.animationView.visibility = View.GONE
 
         }
@@ -74,7 +112,7 @@ class ProductsFragment : Fragment() {
 
 
     private fun navigateToAddProductFragment() {
-        binding.fabAddProducts.setOnClickListener{
+        binding.fabAddProducts.setOnClickListener {
             findNavController().navigate(R.id.action_productsFragment_to_addProductsFragment)
         }
     }
@@ -110,12 +148,25 @@ class ProductsFragment : Fragment() {
     }
 
 
-    private fun initializeAdapter() {
-
-    }
-
     private fun fetchingProducts() {
         viewModel.getProductList()
+    }
+
+    override fun onAppEntryRead(isEntered: Boolean) {
+        // We used this interface , for callback purpose. So that we must read  user entry first then only move ahead
+        lifecycleScope.launch {
+            viewModel.appEntry.collect { isEntered ->
+                if (isEntered) {
+                    Log.d("saving", "User has entered before")
+                    fetchingProducts()
+                    showingProducts()
+                } else {
+                    Log.d("saving", "User has not entered before, saving entry")
+                    saveAppUserEntry()
+                }
+            }
+        }
+
     }
 
 

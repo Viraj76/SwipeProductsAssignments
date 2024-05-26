@@ -12,4 +12,5 @@
     <string name="ok">OK</string>
     <string name="please_turn_on_your_internet_for_posting_products">Please turn on your internet for posting products!</string>
     <string name="add_productss">Add Products</string>
+    <string name="please_turn_on_your_internet_for_fetching_products">Please turn on your internet for fetching products!</string>
 </resources>

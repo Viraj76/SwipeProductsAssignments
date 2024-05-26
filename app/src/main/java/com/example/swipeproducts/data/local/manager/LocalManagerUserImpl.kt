@@ -2,6 +2,7 @@ package com.example.swipeproducts.data.local.manager
 
 
 import android.content.Context
+import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
@@ -26,6 +27,7 @@ class LocalUserManagerImpl(
     }
 
     override suspend fun saveUserEntry() {
+
         context.dataStore.edit {userSettings->
             userSettings[APP_ENTRY] = true
         }

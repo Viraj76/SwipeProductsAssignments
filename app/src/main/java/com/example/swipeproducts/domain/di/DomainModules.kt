@@ -1,8 +1,12 @@
 package com.example.swipeproducts.domain.di
 
 import android.content.Context
+import com.example.swipeproducts.domain.local.manager.LocalUserManager
 import com.example.swipeproducts.domain.repository.NotificationRepository
 import com.example.swipeproducts.domain.repository.ProductsRepository
+import com.example.swipeproducts.domain.usecases.app_entry.ReadUserEntry
+import com.example.swipeproducts.domain.usecases.app_entry.SaveUserEntry
+import com.example.swipeproducts.domain.usecases.app_entry.data_classes.AppEntryUseCases
 import com.example.swipeproducts.domain.usecases.notification.SendNotification
 import com.example.swipeproducts.domain.usecases.notification.data_classes.NotificationUseCase
 import com.example.swipeproducts.domain.usecases.products.GetProductList
@@ -12,6 +16,12 @@ import com.example.swipeproducts.utils.NetworkManager
 import org.koin.dsl.module
 import kotlin.math.sin
 
+
+fun provideAppEntryUseCases(
+    localUserManager: LocalUserManager
+) : AppEntryUseCases{
+    return AppEntryUseCases(ReadUserEntry(localUserManager) , SaveUserEntry(localUserManager))
+}
 
 fun provideProductUseCases(productsRepository: ProductsRepository) : ProductUseCases{
     return ProductUseCases(
@@ -27,6 +37,7 @@ fun provideNotificationUseCases(notificationRepository: NotificationRepository) 
 
 
 val domainModule = module {
+    single { provideAppEntryUseCases(get()) }
     single { provideProductUseCases(get()) }
     single { provideNotificationUseCases(get()) }
 

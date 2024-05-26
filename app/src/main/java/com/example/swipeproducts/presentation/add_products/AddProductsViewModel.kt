@@ -4,6 +4,8 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.swipeproducts.data.dto.ProductPostResponse
+import com.example.swipeproducts.data.dto.notification.Notification
+import com.example.swipeproducts.domain.usecases.notification.data_classes.NotificationUseCase
 import com.example.swipeproducts.domain.usecases.products.PostProducts
 import com.example.swipeproducts.domain.usecases.products.data_classes.ProductUseCases
 import com.example.swipeproducts.utils.Resource
@@ -18,15 +20,17 @@ import org.koin.java.KoinJavaComponent.inject
 class AddProductsViewModel : ViewModel() , KoinComponent {
 
     private val productUseCases: ProductUseCases by inject()  // field injection
+    private val notificationUseCase : NotificationUseCase by inject()
 
     // state for monitoring posting status
-
     private val _postProduct = MutableStateFlow(PostProductState())
     val postProduct = _postProduct
 
-    fun update(){
-        _postProduct.value = PostProductState()
-    }
+    // state for notification sent
+//    private val _sendNotification = MutableStateFlow()
+
+
+
     fun postProducts(
         productName: String,
         productType: String,
@@ -51,4 +55,14 @@ class AddProductsViewModel : ViewModel() , KoinComponent {
             }
         }
     }
+
+
+    fun sendNotification(notification: Notification){
+        viewModelScope.launch {
+            notificationUseCase.sendNotification(notification)
+        }
+    }
+
+
+
 }

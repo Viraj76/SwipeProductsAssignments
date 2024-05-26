@@ -5,5 +5,6 @@ import com.example.swipeproducts.data.dto.ProductPostResponse
 data class PostProductState(
     val loading : Boolean = false,
     val data : ProductPostResponse? = null,
-    val error : String = ""
+    val error : String = "",
+
 )

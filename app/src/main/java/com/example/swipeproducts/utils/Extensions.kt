@@ -15,6 +15,10 @@ import com.example.swipeproducts.databinding.PostingDoneBinding
 import com.example.swipeproducts.databinding.ProgressDialogBinding
 
 
+/*
+Extensions Functions
+ */
+
 fun Fragment.showToast(message: String?) {
     Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
 }
@@ -32,7 +36,6 @@ fun Uri.isValidImage(context: Context): Boolean {
     if (cursor != null && cursor.moveToNext()) {
         strMimeType = cursor.getString(0)
     }
-    Log.d("iamg" , strMimeType.toString())
     if(
         !strMimeType.equals("image/png")&&
         !strMimeType.equals("image/jpeg")&&
@@ -71,6 +74,9 @@ fun Uri.isValidImage(context: Context): Boolean {
 
     return true
 }
+
+
+// progress dialog
 var dialog : AlertDialog? = null
 
 fun Fragment.showDialog(message: String){
@@ -87,6 +93,7 @@ fun Fragment.hideDialog(){
 
 
 
+// posting done dialog
 
 var doneDialog : AlertDialog? = null
 

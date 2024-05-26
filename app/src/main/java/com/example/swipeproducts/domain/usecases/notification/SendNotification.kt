@@ -15,7 +15,7 @@ class SendNotification(
     private val notificationRepository: NotificationRepository
 ) {
     operator fun invoke(notification: Notification) : Flow<Resource<Call<Notification>>> = flow{
-        Log.d("sendnoti" , "usecase")
+        // first emit loading
         emit(Resource.Loading())
 
         try {

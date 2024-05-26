@@ -8,11 +8,11 @@ import com.example.swipeproducts.presentation.products.adapters.ProductsAdapter
 import java.util.Locale
 
 
-// Class for searching for products
+// Class for searching  products
 
 class FilteringProducts(
-    val adapter: ProductsAdapter,
-    val filter: ArrayList<Product>
+    private val adapter: ProductsAdapter,
+    private val filter: ArrayList<Product>
 ) : Filter() {
     override fun performFiltering(constraint: CharSequence?): FilterResults {
         val result = FilterResults()

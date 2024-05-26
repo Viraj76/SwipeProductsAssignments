@@ -27,7 +27,6 @@ class LocalUserManagerImpl(
     }
 
     override suspend fun saveUserEntry() {
-
         context.dataStore.edit {userSettings->
             userSettings[APP_ENTRY] = true
         }
@@ -39,7 +38,5 @@ class LocalUserManagerImpl(
             pref[APP_ENTRY] ?: false
         }
     }
-
-
 
 }

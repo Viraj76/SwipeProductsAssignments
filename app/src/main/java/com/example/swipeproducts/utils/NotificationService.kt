@@ -15,6 +15,9 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import kotlin.random.Random
 
+/*
+Showing notification in the user's device
+ */
 class NotificationService : FirebaseMessagingService() {
 
     override fun onMessageReceived(message: RemoteMessage) {
@@ -32,7 +35,6 @@ class NotificationService : FirebaseMessagingService() {
         manager.createNotificationChannel(channel)
 
         // pending intent , when user clicks on the notification it should open MainActivity
-
         val pendingIntent = PendingIntent.getActivity(this,0, Intent(this , MainActivity::class.java),PendingIntent.FLAG_UPDATE_CURRENT)
 
         val notification = NotificationCompat.Builder(this , channelId)

@@ -11,19 +11,16 @@ import kotlinx.coroutines.flow.flowOn
 class GetProductList(
     private val productsRepository: ProductsRepository
 ) {
-
     operator fun invoke() : Flow<Resource<List<Product>>> = flow{
-
         emit(Resource.Loading())
 
         try {
             emit(Resource.Success(data = productsRepository.getProductList()))
-
         }
+
         catch (e : Exception){
             emit(Resource.Error(message = e.message.toString()))
         }
-
 
     }.flowOn(Dispatchers.IO)
 }

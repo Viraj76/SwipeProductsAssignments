@@ -25,12 +25,11 @@ class PostProducts(
 
         try {
             emit(Resource.Success(data = productsRepository.postProduct(productName, productType, price, tax, image)))
-
         }
+
         catch (e : Exception){
             emit(Resource.Error(message = e.message.toString()))
         }
-
 
     }.flowOn(Dispatchers.IO)
 }

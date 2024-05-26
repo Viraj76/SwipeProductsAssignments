@@ -10,6 +10,8 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ProductsDao  {
+
+    // queries to interact with room database
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(products : List<Product>)
 

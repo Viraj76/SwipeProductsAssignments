@@ -9,18 +9,20 @@ import android.net.NetworkRequest
 import android.util.Log
 import androidx.lifecycle.LiveData
 
+/*
+This class will monitor the internet connectivity in the user's phone.
+and return it as LiveData , we will observe this.
+ */
 class NetworkManager(context: Context) : LiveData<Boolean>() {
 
     override fun onActive() {
         super.onActive()
         checkNetWorkConnectivity()
-        Log.d("Check" , "YES")
     }
 
     override fun onInactive() {
         super.onInactive()
         releaseConnectivityCheck()
-        Log.d("Check" , "NO")
     }
 
     private val connectivityManager =  context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager

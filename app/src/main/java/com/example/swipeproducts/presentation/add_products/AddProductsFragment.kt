@@ -13,6 +13,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.swipeproducts.R
+import com.example.swipeproducts.data.di.dataModules
+import com.example.swipeproducts.data.dto.notification.Notification
+import com.example.swipeproducts.data.dto.notification.NotificationData
 import com.example.swipeproducts.databinding.FragmentAddProductsBinding
 import com.example.swipeproducts.databinding.PostingDoneBinding
 import com.example.swipeproducts.utils.Constants
@@ -22,6 +25,7 @@ import com.example.swipeproducts.utils.isValidImage
 import com.example.swipeproducts.utils.showDialog
 import com.example.swipeproducts.utils.showPostDoneDialog
 import com.example.swipeproducts.utils.showToast
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -81,6 +85,14 @@ class AddProductsFragment : Fragment() {
                         Here the posting is too fast such that the dialog is almost not visible , i.e.
                         I have added delay of 2 seconds to see the dialog only
                          */
+                        FirebaseMessaging.getInstance().token.addOnCompleteListener{
+                            val token = it.result
+                            val title = state.data.message
+                            val body = "Product Name - ${state.data.product_details.product_name} , Product Id - ${state.data.product_id}"
+                            val notification = Notification(token , NotificationData(title , body))
+                            viewModel.sendNotification(notification = notification)
+
+                        }
                         delay(2000)
                         hideDialog()
                         clearAllField()         // clear all the fields after posting one product

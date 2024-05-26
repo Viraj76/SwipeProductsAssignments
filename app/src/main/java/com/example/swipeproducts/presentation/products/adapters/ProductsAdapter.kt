@@ -41,7 +41,7 @@ class ProductsAdapter : RecyclerView.Adapter<ProductsAdapter.ProductsViewHolder>
         holder.binding.apply {
 
             ivProduct.let {
-                if(product.product_name == ""){
+                if(product.image == ""){
                     it.load(R.drawable.placeholder)
                 }
                 else{

@@ -23,7 +23,7 @@ class AddProductsViewModel : ViewModel() , KoinComponent{
         productType: String,
         price: String,
         tax: String,
-        image: List<MultipartBody.Part>?
+        image: MultipartBody.Part?
     ){
         viewModelScope.launch {
             productUseCases.postProducts(productName, productType, price, tax, image).collect{resource ->
@@ -35,7 +35,7 @@ class AddProductsViewModel : ViewModel() , KoinComponent{
                         Log.d("addprodviewm" , resource.data.toString())
                     }
                     is Resource.Error ->{
-                        Log.d("addprodviewm" , resource.message.toString())
+                        Log.d("addprodviewm" , " error ${resource.message.toString()}")
                     }
                 }
             }

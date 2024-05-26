@@ -15,12 +15,12 @@ interface ProductsAPI {
     suspend fun getProductsList() : List<Product>
 
     @Multipart
-    @POST("add")
+    @POST("api/public/add")
     suspend fun addProduct(
         @Part("product_name") productName: okhttp3.RequestBody,
         @Part("product_type") productType: okhttp3.RequestBody,
         @Part("price") price: okhttp3.RequestBody,
         @Part("tax") tax: okhttp3.RequestBody,
-        @Part files: List<MultipartBody.Part>?
+        @Part files: MultipartBody.Part?
     ): ProductPostResponse
 }

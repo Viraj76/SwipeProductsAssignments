@@ -34,7 +34,7 @@ class ProductsRepositoryImpl(
         productType: String,
         price: String,
         tax: String,
-        image: List<MultipartBody.Part>?
+        image: MultipartBody.Part?
     ): ProductPostResponse {
         val productNameBody = productName.toRequestBody(MultipartBody.FORM)
         val productTypeBody = productType.toRequestBody(MultipartBody.FORM)

@@ -18,7 +18,7 @@ class PostProducts(
         productType: String,
         price: String,
         tax: String,
-        image: List<MultipartBody.Part>?
+        image: MultipartBody.Part?
     ) : Flow<Resource<ProductPostResponse>> = flow{
 
         emit(Resource.Loading())

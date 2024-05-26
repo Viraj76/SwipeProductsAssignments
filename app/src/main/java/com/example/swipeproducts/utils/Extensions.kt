@@ -11,6 +11,7 @@ import android.webkit.MimeTypeMap
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import com.example.swipeproducts.databinding.PostingDoneBinding
 import com.example.swipeproducts.databinding.ProgressDialogBinding
 
 
@@ -83,3 +84,19 @@ fun Fragment.showDialog(message: String){
 fun Fragment.hideDialog(){
     dialog?.dismiss()
 }
+
+var doneDialog : AlertDialog? = null
+
+fun Fragment.showPostDoneDialog(){
+    val progress = PostingDoneBinding.inflate(LayoutInflater.from(requireContext()))
+    doneDialog   = AlertDialog.Builder(requireContext()).setView(progress.root).setCancelable(false).create()
+    doneDialog!!.show()
+}
+
+
+fun Fragment.hidePostDoneDialog(){
+    doneDialog?.dismiss()
+}
+
+
+

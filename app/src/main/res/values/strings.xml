@@ -8,4 +8,6 @@
     <string name="product_price">Product Price</string>
     <string name="product_tax">Product Tax</string>
     <string name="product_type">Product Type</string>
+    <string name="product_has_been_posted">Product has been posted!</string>
+    <string name="ok">OK</string>
 </resources>

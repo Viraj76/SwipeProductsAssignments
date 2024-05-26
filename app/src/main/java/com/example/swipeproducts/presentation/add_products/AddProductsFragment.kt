@@ -18,6 +18,7 @@ import com.example.swipeproducts.utils.Constants
 import com.example.swipeproducts.utils.hideDialog
 import com.example.swipeproducts.utils.isValidImage
 import com.example.swipeproducts.utils.showDialog
+import com.example.swipeproducts.utils.showPostDoneDialog
 import com.example.swipeproducts.utils.showToast
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
@@ -72,6 +73,7 @@ class AddProductsFragment : Fragment() {
                         hideDialog()
                         // clear all the fields after posting one product
                         clearAllField()
+                        showPostDoneDialog()
                     }
                 }
             }

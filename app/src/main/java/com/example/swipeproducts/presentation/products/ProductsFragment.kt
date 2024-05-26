@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.example.swipeproducts.R
 import com.example.swipeproducts.databinding.FragmentProductsBinding
 import com.example.swipeproducts.domain.models.Product
@@ -43,7 +44,26 @@ class ProductsFragment : Fragment(), AppEntryCallback {
         super.onViewCreated(view, savedInstanceState)
         checkAppUserEntry()
         searchProducts()
+        onScrollRv()
         navigateToAddProductFragment()
+    }
+
+    // hide and show fab while scrolling through recycler view
+    private fun onScrollRv() {
+        binding.rvProducts.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dy > 10 && binding.fabAddProducts.isShown) {
+                    binding.fabAddProducts.hide()
+                }
+                if (dy < -10 && !binding.fabAddProducts.isShown) {
+                    binding.fabAddProducts.show()
+                }
+                if (!recyclerView.canScrollVertically(-1)) {
+                    binding.fabAddProducts.show()
+                }
+            }
+        })
     }
 
     private fun checkAppUserEntry() {

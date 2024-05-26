@@ -22,9 +22,9 @@ import androidx.room.PrimaryKey
  */
 @Entity(primaryKeys = ["image", "price", "product_name", "product_type", "tax"])
 data class Product(
-    val image: String,
-    val price: Double,
-    val product_name: String,
-    val product_type: String,
-    var tax: Double
+    val image: String = "",
+    val price: Double = 0.0,
+    val product_name: String = "",
+    val product_type: String = "",
+    var tax: Double = 0.0
 )

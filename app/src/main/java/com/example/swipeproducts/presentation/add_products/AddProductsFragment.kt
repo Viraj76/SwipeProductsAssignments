@@ -85,13 +85,14 @@ class AddProductsFragment : Fragment() {
                         hideDialog()
                         clearAllField()         // clear all the fields after posting one product
                         showPostDoneDialog()   // showing done dialog for better UX
-                        delay(4000)
-                        hidePostDoneDialog()   // hiding the dialog after 4 seconds
+                        delay(5000)
+                        hidePostDoneDialog()   // hiding the dialog after 5 seconds
                     }
                 }
             }
         }
     }
+
 
 
 

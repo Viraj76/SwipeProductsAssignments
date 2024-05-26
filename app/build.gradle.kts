@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("kotlin-kapt")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -97,6 +98,11 @@ dependencies {
     //lottie animation
 
     implementation("com.airbnb.android:lottie:6.4.0")
+
+    // firebase for FCM
+    implementation("com.google.firebase:firebase-analytics")
+    implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
+    implementation("com.google.firebase:firebase-messaging-ktx:24.0.0")
 }
 
 

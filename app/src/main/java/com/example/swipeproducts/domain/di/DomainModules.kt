@@ -1,5 +1,6 @@
 package com.example.swipeproducts.domain.di
 
+import android.content.Context
 import com.example.swipeproducts.domain.repository.NotificationRepository
 import com.example.swipeproducts.domain.repository.ProductsRepository
 import com.example.swipeproducts.domain.usecases.notification.SendNotification
@@ -7,6 +8,7 @@ import com.example.swipeproducts.domain.usecases.notification.data_classes.Notif
 import com.example.swipeproducts.domain.usecases.products.GetProductList
 import com.example.swipeproducts.domain.usecases.products.PostProducts
 import com.example.swipeproducts.domain.usecases.products.data_classes.ProductUseCases
+import com.example.swipeproducts.utils.NetworkManager
 import org.koin.dsl.module
 import kotlin.math.sin
 
@@ -22,7 +24,12 @@ fun provideNotificationUseCases(notificationRepository: NotificationRepository) 
     return NotificationUseCase(sendNotification = SendNotification(notificationRepository))
 }
 
+
+
 val domainModule = module {
     single { provideProductUseCases(get()) }
     single { provideNotificationUseCases(get()) }
+
+    // providing single instance of network manager class
+    single { (context: Context) -> NetworkManager(context) }
 }

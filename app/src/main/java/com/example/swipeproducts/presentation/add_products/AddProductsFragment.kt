@@ -20,6 +20,7 @@ import com.example.swipeproducts.data.remote.api.ApiUtilities
 import com.example.swipeproducts.databinding.FragmentAddProductsBinding
 import com.example.swipeproducts.databinding.PostingDoneBinding
 import com.example.swipeproducts.utils.Constants
+import com.example.swipeproducts.utils.NetworkManager
 import com.example.swipeproducts.utils.hideDialog
 import com.example.swipeproducts.utils.hidePostDoneDialog
 import com.example.swipeproducts.utils.isValidImage
@@ -33,6 +34,8 @@ import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
+import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -42,6 +45,7 @@ import java.io.FilterOutputStream
 
 
 class AddProductsFragment : Fragment() {
+    private val networkManager: NetworkManager by inject{ parametersOf(requireContext()) }
 
     private lateinit var binding: FragmentAddProductsBinding
     private val viewModel: AddProductsViewModel by viewModels()
@@ -64,12 +68,30 @@ class AddProductsFragment : Fragment() {
     ): View {
         binding = FragmentAddProductsBinding.inflate(layoutInflater)
 
+        observeNetwork()
 
         providingProductsTypes()
         selectingAnImage()
         onAddProductButtonClick()
         observingPostingProductStatus()
         return binding.root
+    }
+
+    private fun observeNetwork() {
+        networkManager.observe(viewLifecycleOwner){hasInternet->
+            if(!hasInternet){
+                binding.llNoInternet.visibility = View.VISIBLE
+                binding.animationView.visibility = View.GONE
+                binding.llAddingProducts.visibility = View.GONE
+                binding.btnAddProduct.visibility = View.GONE
+            }
+            else{
+                binding.llNoInternet.visibility = View.GONE
+                binding.animationView.visibility = View.VISIBLE
+                binding.llAddingProducts.visibility = View.VISIBLE
+                binding.btnAddProduct.visibility = View.VISIBLE
+            }
+        }
     }
 
     private fun observingPostingProductStatus() {

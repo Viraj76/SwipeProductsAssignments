@@ -15,9 +15,14 @@ import com.example.swipeproducts.R
 import com.example.swipeproducts.databinding.FragmentProductsBinding
 import com.example.swipeproducts.domain.models.Product
 import com.example.swipeproducts.presentation.products.adapters.ProductsAdapter
+import com.example.swipeproducts.utils.NetworkManager
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 
 class ProductsFragment : Fragment() {
+    private val networkManager: NetworkManager by inject{ parametersOf(requireContext()) }
+
     private lateinit var binding: FragmentProductsBinding
     private val viewModel: ProductsViewModel by viewModels()
     private lateinit var productsAdapter: ProductsAdapter

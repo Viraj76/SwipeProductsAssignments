@@ -2,6 +2,8 @@ package com.example.swipeproducts.presentation.products.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -10,8 +12,9 @@ import coil.load
 import com.example.swipeproducts.R
 import com.example.swipeproducts.databinding.IvProductsBinding
 import com.example.swipeproducts.domain.models.Product
+import com.example.swipeproducts.utils.FilteringProducts
 
-class ProductsAdapter : RecyclerView.Adapter<ProductsAdapter.ProductsViewHolder>() {
+class ProductsAdapter : RecyclerView.Adapter<ProductsAdapter.ProductsViewHolder>() , Filterable {
 
     class ProductsViewHolder(val binding : IvProductsBinding) : ViewHolder(binding.root)
 
@@ -53,5 +56,12 @@ class ProductsAdapter : RecyclerView.Adapter<ProductsAdapter.ProductsViewHolder>
             tvProductType.text = product.product_type
             tvProductTax.text = product.tax.toString()
         }
+    }
+
+    private val filter : FilteringProducts? = null
+    var originalList = ArrayList<Product>()
+    override fun getFilter(): Filter {
+        if(filter == null) return FilteringProducts(this,originalList)
+        return filter
     }
 }

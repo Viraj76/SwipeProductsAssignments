@@ -7,7 +7,9 @@ import com.example.swipeproducts.data.local.room.ProductsDao
 import com.example.swipeproducts.data.local.room.ProductsDatabase
 import com.example.swipeproducts.data.remote.api.NotificationAPI
 import com.example.swipeproducts.data.remote.api.ProductsAPI
+import com.example.swipeproducts.data.repository.NotificationRepositoryImpl
 import com.example.swipeproducts.data.repository.ProductsRepositoryImpl
+import com.example.swipeproducts.domain.repository.NotificationRepository
 import com.example.swipeproducts.domain.repository.ProductsRepository
 import com.example.swipeproducts.utils.Constants
 import com.squareup.moshi.Moshi
@@ -57,7 +59,12 @@ fun provideNotificationAPI() : NotificationAPI{
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(NotificationAPI::class.java)
+}
 
+fun provideNotificationRepository(
+    notificationAPI: NotificationAPI
+) : NotificationRepository{
+    return NotificationRepositoryImpl(notificationAPI = notificationAPI)
 }
 
 
@@ -70,4 +77,5 @@ val dataModules = module {
     single { provideProductsRepository(get(),get()) }
     single { provideProductDataBase(get()) }
     single { provideNotificationAPI() }
+    single { provideNotificationRepository(get()) }
 }

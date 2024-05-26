@@ -6,7 +6,7 @@ import com.example.swipeproducts.domain.repository.NotificationRepository
 import retrofit2.Call
 
 class NotificationRepositoryImpl(
-    private val notificationAPI: NotificationAPI
+    val notificationAPI: NotificationAPI
 ) : NotificationRepository {
     override suspend fun sendNotification(notification: Notification): Call<Notification> {
         return notificationAPI.sendNotification(notification)

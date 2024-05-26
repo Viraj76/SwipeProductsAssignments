@@ -35,8 +35,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cv"
-                android:layout_width="@dimen/_85sdp"
-                android:layout_height="@dimen/_85sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 app:cardCornerRadius="@dimen/_10sdp"
                 android:layout_marginHorizontal="@dimen/_3sdp"
                 android:elevation="@dimen/_2sdp"
@@ -44,8 +44,8 @@
                 >
                 <ImageView
                     android:id="@+id/ivProduct"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_width="@dimen/_85sdp"
+                    android:layout_height="@dimen/_85sdp"
                     android:src="@drawable/car"
                     android:scaleType="centerCrop"
                     android:background="@android:color/transparent" />

@@ -91,7 +91,6 @@ class AddProductsFragment : Fragment() {
                             val body = "Product Name - ${state.data.product_details.product_name} , Product Id - ${state.data.product_id}"
                             val notification = Notification(token , NotificationData(title , body))
                             viewModel.sendNotification(notification = notification)
-
                         }
                         delay(2000)
                         hideDialog()

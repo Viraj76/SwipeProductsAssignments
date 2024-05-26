@@ -70,6 +70,7 @@ class AddProductsFragment : Fragment() {
                         Log.d("addprodviewm" , "hide dialod")
                         delay(2000)
                         hideDialog()
+                        // clear all the fields after posting one product
                         clearAllField()
                     }
                 }
@@ -98,7 +99,6 @@ class AddProductsFragment : Fragment() {
             val productTax = binding.etProductTax.text.toString()
 
             if(checkForEmptyFields(productName,productType,productPrice,productTax)){
-                //
 
                 val filesDir = activity?.applicationContext!!.filesDir
                 val file = File(filesDir , "image.png")
@@ -148,6 +148,7 @@ class AddProductsFragment : Fragment() {
         productTax: String
     ) : Boolean{
 
+        // checking if there is any field empty or not
         if (productName.isEmpty()) {
             binding.tilProductName.error = "Please provide Product Name"
             return false

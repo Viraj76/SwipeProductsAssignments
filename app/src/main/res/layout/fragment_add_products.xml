@@ -109,6 +109,7 @@
                 app:boxCornerRadiusTopEnd="@dimen/_13sdp"
                 app:boxCornerRadiusTopStart="@dimen/_13sdp"
                 app:cursorColor="@color/orange"
+
                 app:endIconMode="clear_text"
                 app:hintTextColor="@color/orange">
                 <com.google.android.material.textfield.TextInputEditText
@@ -117,7 +118,7 @@
                     android:layout_height="wrap_content"
                     android:drawablePadding="@dimen/_7sdp"
                     android:hint="@string/product_price"
-                    android:inputType="text" />
+                    android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -134,13 +135,14 @@
                 app:cursorColor="@color/orange"
                 app:endIconMode="clear_text"
                 app:hintTextColor="@color/orange">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etProductTax"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawablePadding="@dimen/_7sdp"
                     android:hint="@string/product_tax"
-                    android:inputType="text" />
+                    android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>

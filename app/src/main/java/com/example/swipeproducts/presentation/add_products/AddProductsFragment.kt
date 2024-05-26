@@ -2,8 +2,6 @@ package com.example.swipeproducts.presentation.add_products
 
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -60,26 +58,34 @@ class AddProductsFragment : Fragment() {
 
     private fun onAddProductButtonClick() {
         binding.btnAddProduct.setOnClickListener{
-            checkForEmptyFields()
+            val productName = binding.etProductName.text.toString()
+            val productType = binding.etProductType.text.toString()
+            val productPrice = binding.etProductPrice.text.toString()
+            val productTax = binding.etProductTax.text.toString()
+
+            checkForEmptyFields(productName,productType,productPrice,productTax)
+
+
         }
     }
 
-    private fun checkForEmptyFields() {
-        val productName = binding.etProductName.text
-        val productType = binding.etProductType.text
-        val productPrice = binding.etProductPrice.text
-        val productTax = binding.etProductTax.text
+    private fun checkForEmptyFields(
+        productName: String,
+        productType: String,
+        productPrice: String,
+        productTax: String
+    ) {
 
-        if (productName!!.isEmpty()) {
+        if (productName.isEmpty()) {
             binding.tilProductName.error = "Please provide Product Name"
         }
-        if(productType!!.isEmpty()){
+        if(productType.isEmpty()){
             binding.tilProductType.error = "Please provide Product Type"
         }
-        if(productPrice!!.isEmpty()){
+        if(productPrice.isEmpty()){
             binding.tilProductPrice.error = "Please provide Product Price"
         }
-        if(productTax!!.isEmpty()){
+        if(productTax.isEmpty()){
             binding.tilProductTax.error = "Please provide Product Tax"
         }
 

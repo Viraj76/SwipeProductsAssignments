@@ -1,7 +1,7 @@
 package com.example.swipeproducts.data.remote.api
 
-import com.example.swipeproducts.data.remote.dto.ProductPostResponse
-import com.example.swipeproducts.data.remote.dto.ProductsDTO
+import com.example.swipeproducts.data.dto.ProductPostResponse
+import com.example.swipeproducts.data.dto.ProductsDTO
 import com.example.swipeproducts.domain.models.Product
 import okhttp3.MultipartBody
 import retrofit2.http.GET
@@ -23,4 +23,6 @@ interface ProductsAPI {
         @Part("tax") tax: okhttp3.RequestBody,
         @Part files: MultipartBody.Part?
     ): ProductPostResponse
+
+
 }

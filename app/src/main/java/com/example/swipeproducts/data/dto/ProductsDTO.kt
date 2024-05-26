@@ -1,4 +1,4 @@
-package com.example.swipeproducts.data.remote.dto
+package com.example.swipeproducts.data.dto
 
 import com.example.swipeproducts.domain.models.Product
 

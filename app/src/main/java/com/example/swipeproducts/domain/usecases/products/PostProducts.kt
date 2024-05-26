@@ -1,6 +1,6 @@
 package com.example.swipeproducts.domain.usecases.products
 
-import com.example.swipeproducts.data.remote.dto.ProductPostResponse
+import com.example.swipeproducts.data.dto.ProductPostResponse
 import com.example.swipeproducts.domain.models.Product
 import com.example.swipeproducts.domain.repository.ProductsRepository
 import com.example.swipeproducts.utils.Resource

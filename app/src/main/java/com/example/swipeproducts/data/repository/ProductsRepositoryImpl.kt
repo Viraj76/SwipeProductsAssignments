@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.room.Dao
 import com.example.swipeproducts.data.local.room.ProductsDao
 import com.example.swipeproducts.data.remote.api.ProductsAPI
-import com.example.swipeproducts.data.remote.dto.ProductPostResponse
+import com.example.swipeproducts.data.dto.ProductPostResponse
 import com.example.swipeproducts.domain.models.Product
 import com.example.swipeproducts.domain.repository.ProductsRepository
 import okhttp3.MultipartBody

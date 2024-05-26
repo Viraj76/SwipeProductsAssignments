@@ -3,7 +3,7 @@ package com.example.swipeproducts.presentation.add_products
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.swipeproducts.data.remote.dto.ProductPostResponse
+import com.example.swipeproducts.data.dto.ProductPostResponse
 import com.example.swipeproducts.domain.usecases.products.PostProducts
 import com.example.swipeproducts.domain.usecases.products.data_classes.ProductUseCases
 import com.example.swipeproducts.utils.Resource

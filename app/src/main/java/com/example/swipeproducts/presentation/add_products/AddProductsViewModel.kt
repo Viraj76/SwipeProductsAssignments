@@ -26,11 +26,9 @@ class AddProductsViewModel : ViewModel() , KoinComponent {
     private val _postProduct = MutableStateFlow(PostProductState())
     val postProduct = _postProduct
 
-    // state for notification sent
-//    private val _sendNotification = MutableStateFlow()
 
 
-
+    // post products
     fun postProducts(
         productName: String,
         productType: String,
@@ -56,10 +54,12 @@ class AddProductsViewModel : ViewModel() , KoinComponent {
         }
     }
 
+    // resetting the state flow of products after posting to the server
     fun update(){
         _postProduct.value = PostProductState()
     }
 
+    // sending notification once the posting products has been done
     fun sendNotification(notification: Notification){
         viewModelScope.launch {
             Log.d("sendnoti" , "viewmodel")
@@ -68,7 +68,4 @@ class AddProductsViewModel : ViewModel() , KoinComponent {
 
         }
     }
-
-
-
 }

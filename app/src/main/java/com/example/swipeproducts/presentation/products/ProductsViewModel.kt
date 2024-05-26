@@ -3,12 +3,11 @@ package com.example.swipeproducts.presentation.products
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.swipeproducts.domain.models.Product
 import com.example.swipeproducts.domain.usecases.app_entry.data_classes.AppEntryUseCases
 import com.example.swipeproducts.domain.usecases.products.data_classes.ProductUseCases
+import com.example.swipeproducts.utils.AppEntryCallback
 import com.example.swipeproducts.utils.Resource
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -20,6 +19,7 @@ class ProductsViewModel : ViewModel(), KoinComponent {
 
     private val appEntryUseCases: AppEntryUseCases by inject()
 
+    // state flows for collecting the required data
     private val _productList = MutableStateFlow(ProductsState())
     val productList = _productList
 
@@ -27,17 +27,17 @@ class ProductsViewModel : ViewModel(), KoinComponent {
     val appEntry = _appEntry
 
 
+    // reading app entry first
      fun readAppEntry(callback: AppEntryCallback) {
-        Log.d("saving", "init called")
         viewModelScope.launch {
             appEntryUseCases.readUserEntry().collect { isEntered ->
-                Log.d("saving", "viewmolde $isEntered")
                 _appEntry.value = isEntered
                 callback.onAppEntryRead(isEntered)
             }
         }
     }
 
+    // get all the products
     fun getProductList() {
         viewModelScope.launch {
             productUseCases.getProductList().collect { resource ->
@@ -65,6 +65,7 @@ class ProductsViewModel : ViewModel(), KoinComponent {
     }
 
 
+    // saving app entry
     fun saveAppUserEntry() {
         viewModelScope.launch {
             appEntryUseCases.saveUserEntry()

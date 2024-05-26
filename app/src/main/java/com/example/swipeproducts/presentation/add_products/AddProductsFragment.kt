@@ -45,11 +45,13 @@ import java.io.FilterOutputStream
 
 
 class AddProductsFragment : Fragment() {
-    private val networkManager: NetworkManager by inject{ parametersOf(requireContext()) }
-
+    private val networkManager: NetworkManager by inject { parametersOf(requireContext()) }
+    private val firebaseMessaging : FirebaseMessaging by inject()
     private lateinit var binding: FragmentAddProductsBinding
     private val viewModel: AddProductsViewModel by viewModels()
     private var selectedImageUri: Uri? = null
+
+    // getting Image uri selected by the user
     private val getContent =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             uri?.let {
@@ -57,8 +59,6 @@ class AddProductsFragment : Fragment() {
                 if (it.isValidImage(requireContext())) {
                     binding.ivProduct.setImageURI(uri)
                 }
-
-
             }
         }
 
@@ -68,25 +68,31 @@ class AddProductsFragment : Fragment() {
     ): View {
         binding = FragmentAddProductsBinding.inflate(layoutInflater)
 
-        observeNetwork()
 
-        providingProductsTypes()
-        selectingAnImage()
+        observeNetwork()    // observing network , without network we can't post products
+
+        providingProductsTypes()    // passing list to the product type , showing list in ArrayAdapter
+
+        selectingAnImage()     // selecting an image
+
         onAddProductButtonClick()
-        observingPostingProductStatus()
+
+        observingPostingProductStatus()   // monitoring posting products status
+
         return binding.root
     }
 
     private fun observeNetwork() {
-        networkManager.observe(viewLifecycleOwner){hasInternet->
-            if(!hasInternet){
+        networkManager.observe(viewLifecycleOwner) { hasInternet ->
+            if (!hasInternet) {
+                // show no internet indication
                 binding.llNoInternet.visibility = View.VISIBLE
-                binding.animationView.visibility = View.GONE
-                binding.llAddingProducts.visibility = View.GONE
-                binding.btnAddProduct.visibility = View.GONE
-            }
-            else{
-                binding.llNoInternet.visibility = View.GONE
+                binding.animationView.visibility = View.INVISIBLE
+                binding.llAddingProducts.visibility = View.INVISIBLE
+                binding.btnAddProduct.visibility = View.INVISIBLE
+            } else {
+
+                binding.llNoInternet.visibility = View.INVISIBLE
                 binding.animationView.visibility = View.VISIBLE
                 binding.llAddingProducts.visibility = View.VISIBLE
                 binding.btnAddProduct.visibility = View.VISIBLE
@@ -101,26 +107,22 @@ class AddProductsFragment : Fragment() {
                     state.loading -> {
                         showDialog("Posting Your Products....")
                     }
-
                     state.error.isNotEmpty() -> {
                         showDialog(state.error)
                     }
-
                     state.data != null -> {
-                        /*
-                        Here the posting is too fast such that the dialog is almost not visible , i.e.
-                        I have added delay of 2 seconds to see the dialog only
-                         */
-                        FirebaseMessaging.getInstance().token.addOnCompleteListener{
-                            val token = it.result
+                        // sending notification first
+                        firebaseMessaging.token.addOnCompleteListener {
+                            val token = it.result    // important for targeting device to send notification , here personal phone token would be accessed
                             val title = state.data.message
                             val body = "Product Name - ${state.data.product_details.product_name} , Product Id - ${state.data.product_id}"
-                            val notification = Notification(token , NotificationData(title , body))
-                            Log.d("sendnoti" , notification.toString())
+                            val notification = Notification(token, NotificationData(title, body))
                             viewModel.sendNotification(notification = notification)
                         }
-
-
+                        /*
+                         Here the posting is too fast such that the dialog is almost not visible , i.e.
+                         I have added delay of 2 seconds to see the dialog only
+                         */
                         delay(2000)
                         hideDialog()
                         clearAllField()         // clear all the fields after posting one product
@@ -134,8 +136,6 @@ class AddProductsFragment : Fragment() {
             }
         }
     }
-
-
 
 
     private fun selectingAnImage() {
@@ -157,31 +157,31 @@ class AddProductsFragment : Fragment() {
             val productType = binding.etProductType.text.toString()
             val productPrice = binding.etProductPrice.text.toString()
             val productTax = binding.etProductTax.text.toString()
-
             if (checkForEmptyFields(productName, productType, productPrice, productTax)) {
-
-                val filesDir = activity?.applicationContext!!.filesDir
-                val file = File(filesDir, "image.png")
-
-                val inputStream = activity?.contentResolver?.openInputStream(selectedImageUri!!)
-                val outputStream = FileOutputStream(file)
-
-                inputStream!!.copyTo(outputStream)
-
-                val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
-
-                val part = MultipartBody.Part.createFormData("profile", file.name, requestBody)
-
-
+                val part = getPart()
                 lifecycleScope.launch {
                     Log.d("addprodviewm", "posting products")
                     viewModel.postProducts(productName, productType, productPrice, productTax, part)
                     Log.d("addprodviewm", viewModel.postProduct.value.toString())
                 }
             }
-
-
         }
+    }
+
+    private fun getPart(): MultipartBody.Part {
+        val filesDir = activity?.applicationContext!!.filesDir
+        val file = File(filesDir, "image.png")
+
+        val inputStream = activity?.contentResolver?.openInputStream(selectedImageUri!!)
+        val outputStream = FileOutputStream(file)
+
+        inputStream!!.copyTo(outputStream)
+
+        val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
+
+        val part = MultipartBody.Part.createFormData("profile", file.name, requestBody)
+
+        return part
     }
 
 
@@ -205,7 +205,6 @@ class AddProductsFragment : Fragment() {
         binding.tilProductPrice.error = null
         binding.tilProductTax.error = null
 
-
         // show default image
         binding.ivProduct.setImageResource(R.drawable.baseline_add_photo_alternate_24)
 
@@ -217,7 +216,6 @@ class AddProductsFragment : Fragment() {
         productPrice: String,
         productTax: String
     ): Boolean {
-
         // checking if there is any field empty or not
         if (productName.isEmpty()) {
             binding.tilProductName.error = "Please provide Product Name"
@@ -235,10 +233,5 @@ class AddProductsFragment : Fragment() {
             showToast("Please select an image")
             return false
         } else return true
-//        } else {
-//            textInputLayout.error = null // Clear the error
-//        }
-
-
     }
 }

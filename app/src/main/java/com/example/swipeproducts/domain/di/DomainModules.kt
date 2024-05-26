@@ -13,6 +13,7 @@ import com.example.swipeproducts.domain.usecases.products.GetProductList
 import com.example.swipeproducts.domain.usecases.products.PostProducts
 import com.example.swipeproducts.domain.usecases.products.data_classes.ProductUseCases
 import com.example.swipeproducts.utils.NetworkManager
+import com.google.firebase.messaging.FirebaseMessaging
 import org.koin.dsl.module
 import kotlin.math.sin
 
@@ -34,13 +35,16 @@ fun provideNotificationUseCases(notificationRepository: NotificationRepository) 
     return NotificationUseCase(sendNotification = SendNotification(notificationRepository))
 }
 
-
+fun provideFirebaseMessaging() : FirebaseMessaging{
+    return FirebaseMessaging.getInstance()
+}
 
 val domainModule = module {
     single { provideAppEntryUseCases(get()) }
     single { provideProductUseCases(get()) }
     single { provideNotificationUseCases(get()) }
 
-    // providing single instance of network manager class
-    single { (context: Context) -> NetworkManager(context) }
+
+    single { (context: Context) -> NetworkManager(context) }    // providing single instance of network manager class
+    single {  provideFirebaseMessaging() }
 }

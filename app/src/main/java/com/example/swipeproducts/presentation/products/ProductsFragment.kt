@@ -1,6 +1,5 @@
 package com.example.swipeproducts.presentation.products
 
-import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -17,10 +16,8 @@ import com.example.swipeproducts.R
 import com.example.swipeproducts.databinding.FragmentProductsBinding
 import com.example.swipeproducts.domain.models.Product
 import com.example.swipeproducts.presentation.products.adapters.ProductsAdapter
+import com.example.swipeproducts.utils.AppEntryCallback
 import com.example.swipeproducts.utils.NetworkManager
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
@@ -106,6 +103,9 @@ class ProductsFragment : Fragment(), AppEntryCallback {
     }
 
 
+    /*
+    Here we are passing the text that is typing by user to the filter class for searching
+     */
     private fun searchProducts() {
         binding.searchEt.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}

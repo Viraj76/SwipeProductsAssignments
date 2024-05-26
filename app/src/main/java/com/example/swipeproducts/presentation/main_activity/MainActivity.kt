@@ -10,6 +10,9 @@ import com.example.swipeproducts.R
 
 class MainActivity : AppCompatActivity() {
 
+    /*
+    ProductFragment and AddProductFragment both are hosted in this activity
+     */
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

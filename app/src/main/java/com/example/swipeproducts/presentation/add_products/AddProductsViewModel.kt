@@ -15,15 +15,18 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koin.java.KoinJavaComponent.inject
 
-class AddProductsViewModel : ViewModel() , KoinComponent{
+class AddProductsViewModel : ViewModel() , KoinComponent {
 
-    private val productUseCases : ProductUseCases by inject()  // field injection
+    private val productUseCases: ProductUseCases by inject()  // field injection
 
     // state for monitoring posting status
 
     private val _postProduct = MutableStateFlow(PostProductState())
     val postProduct = _postProduct
 
+    fun update(){
+        _postProduct.value = PostProductState()
+    }
     fun postProducts(
         productName: String,
         productType: String,
@@ -35,7 +38,6 @@ class AddProductsViewModel : ViewModel() , KoinComponent{
             productUseCases.postProducts(productName, productType, price, tax, image).collect{resource ->
                 when(resource){
                     is Resource.Loading ->{
-                        Log.d("addprodviewm" , "loading")
                         _postProduct.value = PostProductState(loading = true)
                     }
                     is Resource.Success ->{
@@ -44,7 +46,6 @@ class AddProductsViewModel : ViewModel() , KoinComponent{
                     }
                     is Resource.Error ->{
                         Log.d("addprodviewm" , " error ${resource.message.toString()}")
-                        _postProduct.value = PostProductState(error =  resource.message!!)
                     }
                 }
             }

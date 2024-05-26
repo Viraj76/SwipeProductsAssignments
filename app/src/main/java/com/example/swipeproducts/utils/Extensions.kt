@@ -70,11 +70,16 @@ fun Uri.isValidImage(context: Context): Boolean {
 
     return true
 }
+var dialog : AlertDialog? = null
 
 fun Fragment.showDialog(message: String){
-     var dialog : AlertDialog? = null
     val progress = ProgressDialogBinding.inflate(LayoutInflater.from(requireContext()))
     progress.tvMessage.text = message
     dialog   = AlertDialog.Builder(requireContext()).setView(progress.root).setCancelable(false).create()
-    dialog.show()
+    dialog!!.show()
+}
+
+
+fun Fragment.hideDialog(){
+    dialog?.dismiss()
 }

@@ -15,8 +15,12 @@ import androidx.lifecycle.lifecycleScope
 import com.example.swipeproducts.R
 import com.example.swipeproducts.databinding.FragmentAddProductsBinding
 import com.example.swipeproducts.utils.Constants
+import com.example.swipeproducts.utils.hideDialog
 import com.example.swipeproducts.utils.isValidImage
+import com.example.swipeproducts.utils.showDialog
 import com.example.swipeproducts.utils.showToast
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -52,9 +56,26 @@ class AddProductsFragment : Fragment() {
         providingProductsTypes()
         selectingAnImage()
         onAddProductButtonClick()
-
-
-        return binding.root
+        lifecycleScope.launch {
+            viewModel.postProduct.collect{state->
+                when{
+                    state.loading ->{
+                        Log.d("addprodviewm" , "showing dialod")
+                        showDialog("Posting Your Products....")
+                    }
+                    state.error.isNotEmpty() ->{
+                        showDialog(state.error)
+                    }
+                    state.data != null ->{
+                        Log.d("addprodviewm" , "hide dialod")
+                        delay(2000)
+                        hideDialog()
+                        clearAllField()
+                    }
+                }
+            }
+        }
+              return binding.root
     }
 
     private fun selectingAnImage() {
@@ -91,11 +112,11 @@ class AddProductsFragment : Fragment() {
 
                 val part =  MultipartBody.Part.createFormData("profile" , file.name , requestBody)
 
-                val image = getImageMultipart()
-                Log.d("addprodviewm" , "Image - $part")
+
                 lifecycleScope.launch {
                     Log.d("addprodviewm" , "posting products")
                     viewModel.postProducts(productName,productType,productPrice, productTax, part)
+                    Log.d("addprodviewm" , viewModel.postProduct.value.toString())
                 }
             }
 
@@ -103,19 +124,23 @@ class AddProductsFragment : Fragment() {
         }
     }
 
-    private fun getImageMultipart(): MultipartBody.Part? {
-        selectedImageUri?.let { uri ->
-            // Convert the image URI to a File
-            val imageFile = File(uri.path ?: "")
-            val imageRequestBody = imageFile.asRequestBody("image/*".toMediaTypeOrNull())
 
-            val imagedata = MultipartBody.Part.createFormData("image", imageFile.name, imageRequestBody)
-            Log.e("AddNewProductFragment","$imagedata")
-            return imagedata
-        }
+    private fun clearAllField(){
+        binding.etProductName.text?.clear()
+        binding.etProductType.text?.clear()
+        binding.etProductPrice.text?.clear()
+        binding.etProductTax.text?.clear()
 
-        return null
+        binding.ivProduct.setImageURI(null)
+        binding.tilProductName.clearFocus()
+        binding.tilProductType.clearFocus()
+        binding.tilProductPrice.clearFocus()
+        binding.tilProductTax.clearFocus()
+
+        binding.ivProduct.setImageResource(R.drawable.baseline_add_photo_alternate_24)
+
     }
+
     private fun checkForEmptyFields(
         productName: String,
         productType: String,

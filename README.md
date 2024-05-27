@@ -73,15 +73,13 @@ Follow these steps to get the app up and running on your local machine.
 
 5. On the Add Product fragment, enter the product name, select the product type from the dropdown menu, and input the selling price and tax rate.
 
-6. Optionally, click the add image icon to select an image for the new product.
+6. Optionally, click the add image icon to select an image for the new product. Image should of format JPEG or PNG only with 1:1 aspect ratio.
 
-7. Click the "Add Product" button to add the product. A dialog will shown while uploading and once p
-
+7. Click the "Add Product" button to add the product. A dialog will shown while uploading and once product is posted a done dialog will apear and you will also recieve a notification
 
 
 ### Note
-Currently Image is not being uploaded to api as I can't figure out where to upload the image in the cloud and retrieve image link to store cloud image address in Product object.
+Image is not being uploaded , because the folder where we should upload it, is not provided. Altough it was optional to upload an image
 
-Please elaborate me about this so I could implement this functionality.
-## API Endpoint
+
 

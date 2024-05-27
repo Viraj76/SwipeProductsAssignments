@@ -26,7 +26,7 @@ Please click the link below to download the APK:
 
 Please click the link below to watch demo video of the complete app
 
-[Download APK](https://drive.google.com/file/d/1v1RwA8-chgdndYQnh6YvnkrdZm_--ahM/view?usp=drive_link)
+[Watch the Video](https://drive.google.com/file/d/1v1RwA8-chgdndYQnh6YvnkrdZm_--ahM/view?usp=drive_link)
 
 
 

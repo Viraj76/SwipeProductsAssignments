@@ -179,15 +179,18 @@ class AddProductsFragment : Fragment() {
     }
 
     private fun getImageMultipart(): MultipartBody.Part? {
-        selectedImageUri?.let { uri ->
-            // Convert the image URI to a File
-            val imageFile = File(uri.path ?: "")
-            val imageRequestBody = imageFile.asRequestBody("image/*".toMediaTypeOrNull())
-            val imagedata = MultipartBody.Part.createFormData("image", imageFile.name, imageRequestBody)
-            return imagedata
-        }
+        val filesDir = activity?.applicationContext!!.filesDir
+        val file = File(filesDir , "image.png")
 
-        return null
+        val inputStream = activity?.contentResolver?.openInputStream(selectedImageUri!!)
+        val outputStream = FileOutputStream(file)
+
+        inputStream!!.copyTo(outputStream)
+
+        val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
+
+        val part =  MultipartBody.Part.createFormData("profile" , file.name , requestBody)
+        return part
     }
 
 

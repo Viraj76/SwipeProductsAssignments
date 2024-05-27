@@ -113,7 +113,10 @@ class ProductsFragment : Fragment(), AppEntryCallback {
             override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 val query = s.toString().trim()
                 if (query.isEmpty()) binding.rvProducts.scrollToPosition(0) // when user clears the search field , then user should see the first product of the list.
-                productsAdapter.filter.filter(query)
+                if(::productsAdapter.isInitialized){
+                    productsAdapter.filter.filter(query)
+                }
+
             }
 
             override fun afterTextChanged(p0: Editable?) {}

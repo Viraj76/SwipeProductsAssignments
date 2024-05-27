@@ -39,7 +39,7 @@ import java.io.FileOutputStream
 
 class AddProductsFragment : Fragment() {
     private val networkManager: NetworkManager by inject { parametersOf(requireContext()) }
-    private val firebaseMessaging : FirebaseMessaging by inject()
+    private val firebaseMessaging: FirebaseMessaging by inject()
     private lateinit var binding: FragmentAddProductsBinding
     private val viewModel: AddProductsViewModel by viewModels()
     private var selectedImageUri: Uri? = null
@@ -77,7 +77,7 @@ class AddProductsFragment : Fragment() {
     }
 
     private fun backToProductFragment() {
-        binding.ivBackToProductFragment.setOnClickListener{
+        binding.ivBackToProductFragment.setOnClickListener {
             findNavController().navigate(R.id.action_addProductsFragment_to_productsFragment)
 
         }
@@ -108,15 +108,19 @@ class AddProductsFragment : Fragment() {
                     state.loading -> {
                         showDialog("Posting Your Products....")
                     }
+
                     state.error.isNotEmpty() -> {
                         showDialog(state.error)
                     }
+
                     state.data != null -> {
                         // sending notification first
                         firebaseMessaging.token.addOnCompleteListener {
-                            val token = it.result    // important for targeting device to send notification , here personal phone token would be accessed
+                            val token =
+                                it.result    // important for targeting device to send notification , here personal phone token would be accessed
                             val title = state.data.message
-                            val body = "Product Name - ${state.data.product_details.product_name} , Product Id - ${state.data.product_id}"
+                            val body =
+                                "Product Name - ${state.data.product_details.product_name} , Product Id - ${state.data.product_id}"
                             val notification = Notification(token, NotificationData(title, body))
                             viewModel.sendNotification(notification = notification)
                         }
@@ -159,30 +163,29 @@ class AddProductsFragment : Fragment() {
             val productPrice = binding.etProductPrice.text.toString()
             val productTax = binding.etProductTax.text.toString()
             if (checkForEmptyFields(productName, productType, productPrice, productTax)) {
-                val part = getPart()
+
+                val image = getImageMultipart() // select image , optionally
+
                 lifecycleScope.launch {
-                    Log.d("addprodviewm", "posting products")
-                    viewModel.postProducts(productName, productType, productPrice, productTax, part)
-                    Log.d("addprodviewm", viewModel.postProduct.value.toString())
+                    viewModel.postProducts(productName, productType, productPrice, productTax, image)
                 }
             }
         }
     }
 
-    private fun getPart(): MultipartBody.Part {
-        val filesDir = activity?.applicationContext!!.filesDir
-        val file = File(filesDir, "image.png")
+    private fun getImageMultipart(): MultipartBody.Part? {
+        selectedImageUri?.let { uri ->
+            // Convert the image URI to a File
+            val imageFile = File(uri.path ?: "")
+            val imageRequestBody = imageFile.asRequestBody("image/*".toMediaTypeOrNull())
 
-        val inputStream = activity?.contentResolver?.openInputStream(selectedImageUri!!)
-        val outputStream = FileOutputStream(file)
+            val imagedata =
+                MultipartBody.Part.createFormData("image", imageFile.name, imageRequestBody)
+            Log.e("AddNewProductFragment", "$imagedata")
+            return imagedata
+        }
 
-        inputStream!!.copyTo(outputStream)
-
-        val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
-
-        val part = MultipartBody.Part.createFormData("profile", file.name, requestBody)
-
-        return part
+        return null
     }
 
 
@@ -229,9 +232,6 @@ class AddProductsFragment : Fragment() {
             return false
         } else if (productTax.isEmpty()) {
             binding.tilProductTax.error = "Please provide Product Tax"
-            return false
-        } else if (selectedImageUri == null) {
-            showToast("Please select an image")
             return false
         } else return true
     }

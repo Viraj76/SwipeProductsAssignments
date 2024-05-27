@@ -160,8 +160,6 @@ class ProductsFragment : Fragment(), AppEntryCallback {
                     }
 
                 }
-
-
             }
         }
 

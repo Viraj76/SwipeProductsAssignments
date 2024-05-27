@@ -12,6 +12,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.swipeproducts.R
 import com.example.swipeproducts.data.di.dataModules
 import com.example.swipeproducts.data.dto.notification.Notification
@@ -68,6 +69,7 @@ class AddProductsFragment : Fragment() {
     ): View {
         binding = FragmentAddProductsBinding.inflate(layoutInflater)
 
+        backToProductFragment()
 
         observeNetwork()    // observing network , without network we can't post products
 
@@ -80,6 +82,13 @@ class AddProductsFragment : Fragment() {
         observingPostingProductStatus()   // monitoring posting products status
 
         return binding.root
+    }
+
+    private fun backToProductFragment() {
+        binding.ivBackToProductFragment.setOnClickListener{
+            findNavController().navigate(R.id.action_addProductsFragment_to_productsFragment)
+
+        }
     }
 
     private fun observeNetwork() {

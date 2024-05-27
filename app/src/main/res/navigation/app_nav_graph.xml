@@ -22,5 +22,15 @@
         android:id="@+id/addProductsFragment"
         android:name="com.example.swipeproducts.presentation.add_products.AddProductsFragment"
         android:label="fragment_add_products"
-        tools:layout="@layout/fragment_add_products" />
+        tools:layout="@layout/fragment_add_products" >
+        <action
+            android:id="@+id/action_addProductsFragment_to_productsFragment"
+            app:destination="@id/productsFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left"
+            app:popUpTo="@id/productsFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

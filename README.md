@@ -109,7 +109,7 @@ Follow these steps to get the app up and running on your local machine.
 
 
 ## Note -:
-Image is not being uploaded , because the folder where we should upload it, is not provided. Altough it was optional to upload an image
+Image is not being uploaded , because the folder where we should upload it in the server, is not provided. Altough it was optional to upload an image
 
 
 ## Screenshots (Light Mode)

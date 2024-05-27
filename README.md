@@ -1,5 +1,6 @@
 # Assignment by Swipe for Android Developer role
 
+
 ## APK Download
 
 Please click the link below to download the APK:
@@ -99,114 +100,47 @@ Follow these steps to get the app up and running on your local machine.
 7. Click the "Add Product" button to add the product. A dialog will shown while uploading and once product is posted a done dialog will apear and you will also recieve a notification
 
 
-### Note
+## Note -:
 Image is not being uploaded , because the folder where we should upload it, is not provided. Altough it was optional to upload an image
 
-# Assignment by Swipe for Android Developer Role
 
-## Table of Contents
+## Screenshots (Light Mode)
 
-- [APK Download](#apk-download)
-- [Installation Instructions](#installation-instructions)
-- [Additional Information](#additional-information)
-  - [Language](#language)
-  - [Architecture](#architecture)
-  - [Notifications](#notifications)
-  - [Networking](#networking)
-  - [Caching](#caching)
-  - [Dependency Injection](#dependency-injection)
-  - [Async Programming](#async-programming)
-  - [Navigation](#navigation)
-  - [Image Loading](#image-loading)
-  - [Animations](#animations)
-  - [Loading Indicators](#loading-indicators)
-  - [Persistent Storage](#persistent-storage)
-  - [Splash Screen](#splash-screen)
-  - [Single Activity App](#single-activity-app)
-  - [RecyclerView](#recyclerview)
-  - [Network Manager](#network-manager)
-  - [Search Functionality](#search-functionality)
-  - [Notifications and Dialogs](#notifications-and-dialogs)
-  - [Landscape Mode](#landscape-mode)
-  - [Dialog Design](#dialog-design)
-  - [Dark Mode Compatibility](#dark-mode-compatibility)
+Product Fragment
 
-## APK Download
+| ![1](https://github.com/Viraj76/SwipeProductsAssignments/assets/98775599/b7addb16-29eb-4241-b990-f334fe047b60) | ![2](https://github.com/Viraj76/SwipeProductsAssignments/assets/98775599/0686e5a8-dc22-481b-adc7-86422a22404e) | ![3](https://github.com/Viraj76/SwipeProductsAssignments/assets/98775599/0c086ca4-82a6-4b79-aa8d-737f6bc6819a) |
+|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|
+| Splash Screen                                          | Products Fragment when no internet                                          | Fetching products when we turn on internet                                          |
 
-Click the link below to download the APK:
 
-[Download APK](https://drive.google.com/file/d/1v1RwA8-chgdndYQnh6YvnkrdZm_--ahM/view?usp=sharing)
 
-## Installation Instructions
+| ![1](https://github.com/Viraj76/SwipeProductsAssignments/assets/98775599/b7addb16-29eb-4241-b990-f334fe047b60) | ![2](https://github.com/Viraj76/SwipeProductsAssignments/assets/98775599/0686e5a8-dc22-481b-adc7-86422a22404e) | ![3](https://github.com/Viraj76/SwipeProductsAssignments/assets/98775599/0c086ca4-82a6-4b79-aa8d-737f6bc6819a) |
+|---------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|
+| Product Fragment when Products has been fetched                                                                     | Searching Products                                                                                                  | Showing Lottie animation if no data found while searching                                                         |
 
-1. Click the download link above to download the APK file.
-2. Once downloaded, open the APK file on your device.
-3. If prompted, allow the installation from unknown sources.
-4. Follow the on-screen instructions to complete the installation.
 
-## Additional Information
+Add Product Fragment
 
-### Language
-Kotlin, XML
+| ![9](https://github.com/Viraj76/SwipeProductsAssignments/assets/98775599/ccdeee1d-38ce-4ea4-ab5b-f97f30fb2bd3) | ![10](https://github.com/Viraj76/SwipeProductsAssignments/assets/98775599/d738e3d4-460c-447f-9185-9cf0fa5e8285) | ![11](https://github.com/Viraj76/SwipeProductsAssignments/assets/98775599/0e7c9af1-c0d7-494b-b926-ef3bcc81e6f6) |
+|---------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|
+| Asking to turn on internet then only we can post the products                                                        | Layouts for adding product detail when internet is on                                                               | No field should be empty                                                                                           |
 
-### Architecture
-Clean Architecture with MVVM pattern
+| ![12](https://github.com/Viraj76/SwipeProductsAssignments/assets/98775599/1df2d550-845b-414c-a5a2-fcbb56312c52) | ![13](https://github.com/Viraj76/SwipeProductsAssignments/assets/98775599/ce3476bc-6821-4543-98c9-4f1031b786fc) | ![14](https://github.com/Viraj76/SwipeProductsAssignments/assets/98775599/5bad1ff6-ab48-4d11-afbf-b9b41f51f996) |
+|---------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|
+| Showing toast if the image is not PNG or JPEG (Optional)                                                            | Showing toast if the image is not having aspect ration 1:1                                                          | Selected Image which has PNG or JPEG format and 1:1 aspect ratio                                                  |
 
-### Notifications
-Firebase for sending notifications (FCM - Firebase Cloud Messaging)
+| ![15](https://github.com/Viraj76/SwipeProductsAssignments/assets/98775599/69479d87-1956-401b-8518-6c460f710806) | ![16](https://github.com/Viraj76/SwipeProductsAssignments/assets/98775599/c70dd465-0385-4aca-8a7c-03f0686bf510) | ![18](https://github.com/Viraj76/SwipeProductsAssignments/assets/98775599/21ec362b-f9c2-4b98-9afe-14ecdcc2c083) |
+|---------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|
+| Showing posting product dialog                                                                                      | Showing posting done dialog once product is posted                                                                  | Recieved notification when product is posted                                                                        |
 
-### Networking
-Retrofit for network calls
+| ![20](https://github.com/Viraj76/SwipeProductsAssignments/assets/98775599/b45802e1-40d9-4978-a395-dcf2c83a8618) |
+|-------------------------------------------------------------------------------------------------------------|
+| Product has been posted, Searching the product that we have just posted.                                    |
 
-### Caching
-Room DB for caching data
 
-### Dependency Injection
-Koin for dependency injection
 
-### Async Programming
-Flows, Coroutines, LiveData
+## Screenshots (Dark Mode)
 
-### Navigation
-Navigation Component for navigating between fragments
 
-### Image Loading
-Coil for loading images
-
-### Animations
-Lottie Animation for enhanced user experience
-
-### Loading Indicators
-Shimmer Effect for displaying loading states
-
-### Persistent Storage
-DataStore for storing user's app preferences
-
-### Splash Screen
-Splash API for displaying the splash screen
-
-### Single Activity App
-Hosts two fragments within one activity
-
-### RecyclerView
-Displays the product list
-
-### Network Manager
-Monitors the internet connection throughout the app
-
-### Search Functionality
-Allows searching by name, tax, price, and type
-
-### Notifications and Dialogs
-Sends notifications and shows appropriate dialogs after a product is posted
-
-### Landscape Mode
-Fully functional in landscape orientation
-
-### Dialog Design
-Displays beautiful and appropriate dialogs
-
-### Dark Mode Compatibility
-Supports dark mode
 
 

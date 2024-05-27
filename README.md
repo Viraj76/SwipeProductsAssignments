@@ -46,7 +46,7 @@ Please click the link below to watch demo video of the complete app
 - **Splash Screen**: Splash API for displaying the splash screen
 
 
-## Feature
+## Features
 - **Single Activity App**: Hosts two fragments within one activity
 - **RecyclerView**: Displays the product list
 - **Network Manager**: Monitors the internet connection throughout the app

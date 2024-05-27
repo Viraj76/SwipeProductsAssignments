@@ -13,7 +13,7 @@
 
 Please click the link below to download the APK:
 
-[Download APK](https://drive.google.com/file/d/1Sjo-I7oe3jWOc92OXQKh3Ocmz7u5N7Ms/view?usp=sharing)
+[Download APK](https://drive.google.com/file/d/1WX0Vr5G1bgSrdTLMlIVIeoLY6iEeBH54/view?usp=sharing)
 
 ### Installation Instructions
 

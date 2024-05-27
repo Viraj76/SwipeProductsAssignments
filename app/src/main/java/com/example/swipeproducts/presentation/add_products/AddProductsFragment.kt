@@ -48,8 +48,9 @@ class AddProductsFragment : Fragment() {
     private val getContent =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             uri?.let {
-                selectedImageUri = it
+
                 if (it.isValidImage(requireContext())) {
+                    selectedImageUri = it
                     binding.ivProduct.setImageURI(uri)
                 }
             }
@@ -71,9 +72,14 @@ class AddProductsFragment : Fragment() {
 
         onAddProductButtonClick()
 
-        observingPostingProductStatus()   // monitoring posting products status
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        observingPostingProductStatus()   // monitoring posting products status
+
     }
 
     private fun backToProductFragment() {
@@ -163,7 +169,6 @@ class AddProductsFragment : Fragment() {
             val productPrice = binding.etProductPrice.text.toString()
             val productTax = binding.etProductTax.text.toString()
             if (checkForEmptyFields(productName, productType, productPrice, productTax)) {
-
                 val image = getImageMultipart() // select image , optionally
 
                 lifecycleScope.launch {
@@ -178,10 +183,7 @@ class AddProductsFragment : Fragment() {
             // Convert the image URI to a File
             val imageFile = File(uri.path ?: "")
             val imageRequestBody = imageFile.asRequestBody("image/*".toMediaTypeOrNull())
-
-            val imagedata =
-                MultipartBody.Part.createFormData("image", imageFile.name, imageRequestBody)
-            Log.e("AddNewProductFragment", "$imagedata")
+            val imagedata = MultipartBody.Part.createFormData("image", imageFile.name, imageRequestBody)
             return imagedata
         }
 

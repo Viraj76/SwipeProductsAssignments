@@ -43,11 +43,9 @@ class AddProductsViewModel : ViewModel() , KoinComponent {
                         _postProduct.value = PostProductState(loading = true)
                     }
                     is Resource.Success ->{
-                        Log.d("addprodviewm" , resource.data.toString())
                         _postProduct.value = PostProductState(data =  resource.data!!)
                     }
                     is Resource.Error ->{
-                        Log.d("addprodviewm" , " error ${resource.message.toString()}")
                     }
                 }
             }
@@ -62,7 +60,6 @@ class AddProductsViewModel : ViewModel() , KoinComponent {
     // sending notification once the posting products has been done
     fun sendNotification(notification: Notification){
         viewModelScope.launch {
-            Log.d("sendnoti" , "viewmodel")
             // we should always collect a flow other wise code will not run
             notificationUseCase.sendNotification(notification).collect{ }
 

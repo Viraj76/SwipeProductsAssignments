@@ -9,7 +9,7 @@
 - [Screenshots (Dark Mode)](#screenshots-dark-mode)
 
 
-## APK Download
+## Download APK
 
 Please click the link below to download the APK:
 

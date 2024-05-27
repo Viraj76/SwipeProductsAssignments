@@ -32,7 +32,7 @@ Follow these steps to get the app up and running on your local machine.
 
 ### Method - 1
 
-1. Click on Code(green button) and download the zip.
+1. Click on Code(above green button) and download the zip.
 
 2. Unzip it , where it was downloaded. 
 
@@ -48,14 +48,40 @@ Follow these steps to get the app up and running on your local machine.
 
 ### Method - 2 (Git should be connected with Android studio for this method)
 
-1. Click on Code(green button) and copy HTTPS link
+1. Click on Code(above green button) and copy HTTPS link
 
 2. Go to Android Studio , File -> New -> Project from version control
 
-3. Paste the copied url.
+3. Paste the copied url and click on ok.
 
 5. Wait for Gradle to sync and build the project.
 
 6. Connect an Android device or start an Android emulator with API level 27 or later.
 
 7. Run the app on the connected device or emulator using the Run button in Android Studio.
+
+
+## How to Use the App
+
+1. Ensure your device is connected to the internet. The app opens to the product listing screen where you can view a list of products.
+
+2. Use the search bar at the top to find products by name, type, price, or tax.
+
+3. Scroll through the list to see all available products.
+
+4. To add a new product, click on floating action button at bottom right.
+
+5. On the Add Product fragment, enter the product name, select the product type from the dropdown menu, and input the selling price and tax rate.
+
+6. Optionally, click the add image icon to select an image for the new product.
+
+7. Click the "Add Product" button to add the product. A dialog will shown while uploading and once p
+
+
+
+### Note
+Currently Image is not being uploaded to api as I can't figure out where to upload the image in the cloud and retrieve image link to store cloud image address in Product object.
+
+Please elaborate me about this so I could implement this functionality.
+## API Endpoint
+

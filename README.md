@@ -1,4 +1,4 @@
-# Assignment by Swipe for Android Developer role
+# Content
 - [APK Download](#apk-download)
 - [Watch Demonstration Video](#watch-demonstration-video)
 - [Tech Stacks](#tech-stacks)

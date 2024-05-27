@@ -14,12 +14,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.swipeproducts.R
-import com.example.swipeproducts.data.di.dataModules
 import com.example.swipeproducts.data.dto.notification.Notification
 import com.example.swipeproducts.data.dto.notification.NotificationData
-import com.example.swipeproducts.data.remote.api.ApiUtilities
 import com.example.swipeproducts.databinding.FragmentAddProductsBinding
-import com.example.swipeproducts.databinding.PostingDoneBinding
 import com.example.swipeproducts.utils.Constants
 import com.example.swipeproducts.utils.NetworkManager
 import com.example.swipeproducts.utils.hideDialog
@@ -30,19 +27,14 @@ import com.example.swipeproducts.utils.showPostDoneDialog
 import com.example.swipeproducts.utils.showToast
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import java.io.File
 import java.io.FileOutputStream
-import java.io.FilterOutputStream
 
 
 class AddProductsFragment : Fragment() {

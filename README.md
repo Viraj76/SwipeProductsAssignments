@@ -160,6 +160,7 @@ Add Product Fragment
 
 ## Screenshots (Dark Mode)
 
+Product Fragment
 
 | ![1](https://github.com/Viraj76/SwipeProductsAssignments/assets/98775599/9915fbd0-6327-4276-a082-f983993e84dc) | ![Screenshot_2024-05-27-20-23-56-82_c2d16710d642a9dce14ef796728f67af](https://github.com/Viraj76/SwipeProductsAssignments/assets/98775599/c300ff55-9c80-4e61-90ec-f51f497562c7) | ![Screenshot_2024-05-27-20-24-05-74_c2d16710d642a9dce14ef796728f67af](https://github.com/Viraj76/SwipeProductsAssignments/assets/98775599/ea475bc0-f372-40c3-9ae5-f09e82fdb284) |
 |-------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -175,7 +176,7 @@ Add Product Fragment
 | Product Fragment when Products has been fetched                                                                                                                              | Searching Products                                                                                                                                                        | Showing Lottie animation if no data found while searching                                                                                                                   |
 
 
-
+Add Product Fragment
 
 
 

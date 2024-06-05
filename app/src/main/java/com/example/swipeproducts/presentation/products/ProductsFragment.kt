@@ -1,5 +1,6 @@
 package com.example.swipeproducts.presentation.products
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -25,20 +26,24 @@ import org.koin.core.parameter.parametersOf
 class ProductsFragment : Fragment(), AppEntryCallback {
     private val networkManager: NetworkManager by inject { parametersOf(requireContext()) }
 
+
     private lateinit var binding: FragmentProductsBinding
     private val viewModel: ProductsViewModel by viewModels()
     private lateinit var productsAdapter: ProductsAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        Log.d(TAG, "onCreateView : Product Fragment")
         binding = FragmentProductsBinding.inflate(layoutInflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.d(TAG, "onViewCreated : Product Fragment")
         checkAppUserEntry()
         searchProducts()
         onScrollRv()
@@ -62,12 +67,10 @@ class ProductsFragment : Fragment(), AppEntryCallback {
             }
         })
     }
-
     private fun checkAppUserEntry() {
         // reading whether the user has entered to the app earlier or not
         viewModel.readAppEntry(this)
     }
-
     private fun saveAppUserEntry() {
 
         networkManager.observe(viewLifecycleOwner) { hasInternet ->
@@ -102,7 +105,6 @@ class ProductsFragment : Fragment(), AppEntryCallback {
         }
     }
 
-
     /*
     Here we are passing the text that is typing by user to the filter class for searching
      */
@@ -123,7 +125,6 @@ class ProductsFragment : Fragment(), AppEntryCallback {
 
         })
     }
-
     private fun showingNoDataLottie(show: Boolean) {
         if (show) {
             binding.animationView.visibility = View.VISIBLE
@@ -132,14 +133,11 @@ class ProductsFragment : Fragment(), AppEntryCallback {
 
         }
     }
-
-
     private fun navigateToAddProductFragment() {
         binding.fabAddProducts.setOnClickListener {
             findNavController().navigate(R.id.action_productsFragment_to_addProductsFragment)
         }
     }
-
     private fun showingProducts() {
         lifecycleScope.launch {
             viewModel.productList.collect { state ->
@@ -167,12 +165,9 @@ class ProductsFragment : Fragment(), AppEntryCallback {
         }
 
     }
-
-
     private fun fetchingProducts() {
         viewModel.getProductList()
     }
-
     override fun onAppEntryRead(isEntered: Boolean) {
         // We used this interface , for callback purpose. So that we must read  user entry first then only move ahead
         lifecycleScope.launch {
@@ -190,5 +185,41 @@ class ProductsFragment : Fragment(), AppEntryCallback {
 
     }
 
+
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG, "onStart : Product Fragment")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "onResume : Product Fragment")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG, "onPause : Product Fragment")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, "onStop : Product Fragment")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.d(TAG, "onDestroyView : Product Fragment")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG, "onDestroy : Product Fragment")
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        Log.d(TAG, "onDetach : Product Fragment")
+    }
 
 }

@@ -71,4 +71,9 @@ class ProductsViewModel : ViewModel(), KoinComponent {
             appEntryUseCases.saveUserEntry()
         }
     }
+
+    override fun onCleared() {
+        super.onCleared()
+        Log.d("viewmodelll" , "cleared")
+    }
 }

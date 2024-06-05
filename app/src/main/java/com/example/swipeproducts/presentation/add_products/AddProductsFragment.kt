@@ -1,6 +1,8 @@
 package com.example.swipeproducts.presentation.add_products
 
 import android.annotation.SuppressLint
+import android.content.ContentValues
+import android.content.ContentValues.TAG
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -48,9 +50,9 @@ class AddProductsFragment : Fragment() {
     private val getContent =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             uri?.let {
+                selectedImageUri = it
 
                 if (it.isValidImage(requireContext())) {
-                    selectedImageUri = it
                     binding.ivProduct.setImageURI(uri)
                 }
             }
@@ -60,6 +62,7 @@ class AddProductsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        Log.d(TAG, "onCreateView : Add Products Fragments")
         binding = FragmentAddProductsBinding.inflate(layoutInflater)
 
         backToProductFragment()
@@ -79,7 +82,7 @@ class AddProductsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observingPostingProductStatus()   // monitoring posting products status
-
+        Log.d(TAG, "onViewCreated : Add Products Fragments")
     }
 
     private fun backToProductFragment() {
@@ -180,18 +183,27 @@ class AddProductsFragment : Fragment() {
 
     private fun getImageMultipart(): MultipartBody.Part? {
         val filesDir = activity?.applicationContext!!.filesDir
-        val file = File(filesDir , "image.png")
+        val file = File(filesDir, "image.png")
 
-        val inputStream = activity?.contentResolver?.openInputStream(selectedImageUri!!)
-        val outputStream = FileOutputStream(file)
+        // Check if the selected image URI is not null
+        if (selectedImageUri != null) {
+            val inputStream = activity?.contentResolver?.openInputStream(selectedImageUri!!)
+            val outputStream = FileOutputStream(file)
 
-        inputStream!!.copyTo(outputStream)
+            inputStream!!.copyTo(outputStream)
 
-        val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
+            val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
+            return MultipartBody.Part.createFormData("profile", file.name, requestBody)
+        } else {
+            // If selectedImageUri is null, return a default or empty MultipartBody.Part
+            val dummyFile = File(filesDir, "dummy_image.png")
+            dummyFile.createNewFile() // Create an empty dummy file
 
-        val part =  MultipartBody.Part.createFormData("profile" , file.name , requestBody)
-        return part
+            val requestBody = dummyFile.asRequestBody("image/*".toMediaTypeOrNull())
+            return MultipartBody.Part.createFormData("profile", dummyFile.name, requestBody)
+        }
     }
+
 
 
     private fun clearAllField() {
@@ -239,5 +251,41 @@ class AddProductsFragment : Fragment() {
             binding.tilProductTax.error = "Please provide Product Tax"
             return false
         } else return true
+    }
+
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(ContentValues.TAG, "onStart : Add Products Fragments")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(ContentValues.TAG, "onResume : Add Products Fragments")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(ContentValues.TAG, "onPause : Add Products Fragments")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(ContentValues.TAG, "onStop : Add Products Fragments")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.d(ContentValues.TAG, "onDestroyView : Add Products Fragments")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(ContentValues.TAG, "onDestroy : Add Products Fragments")
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        Log.d(ContentValues.TAG, "onDetach : Add Products Fragments")
     }
 }

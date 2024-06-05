@@ -65,4 +65,9 @@ class AddProductsViewModel : ViewModel() , KoinComponent {
 
         }
     }
+
+    override fun onCleared() {
+        super.onCleared()
+//        Log.d("viewmodelll" , "cleared")
+    }
 }

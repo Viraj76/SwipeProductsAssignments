@@ -9,11 +9,11 @@
 - [Screenshots (Dark Mode)](#screenshots-dark-mode)
 
 
-## APK Download
+## Download APK
 
 Please click the link below to download the APK:
 
-[Download APK](https://drive.google.com/file/d/1Sjo-I7oe3jWOc92OXQKh3Ocmz7u5N7Ms/view?usp=sharing)
+[Download APK](https://drive.google.com/file/d/1WX0Vr5G1bgSrdTLMlIVIeoLY6iEeBH54/view?usp=sharing)
 
 ### Installation Instructions
 
@@ -26,7 +26,7 @@ Please click the link below to download the APK:
 
 Please click the link below to watch demo video of the complete app
 
-[Download APK](https://drive.google.com/file/d/1v1RwA8-chgdndYQnh6YvnkrdZm_--ahM/view?usp=drive_link)
+[Watch the Video](https://drive.google.com/file/d/1v1RwA8-chgdndYQnh6YvnkrdZm_--ahM/view?usp=drive_link)
 
 
 
@@ -109,7 +109,7 @@ Follow these steps to get the app up and running on your local machine.
 
 
 ## Note -:
-Image is not being uploaded , because the folder where we should upload it, is not provided. Altough it was optional to upload an image
+Image is not being uploaded , because the folder where we should upload it in the server, is not provided. Altough it was optional to upload an image
 
 
 ## Screenshots (Light Mode)
